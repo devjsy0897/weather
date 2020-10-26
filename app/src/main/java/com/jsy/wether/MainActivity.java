@@ -34,15 +34,17 @@ public class MainActivity extends AppCompatActivity {
                 Thread t = new Thread(new Runnable() {
                     @Override
                     public void run() {
-
-                        try {
-                            whether();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
                     }
                 });
                 t.start();
+                try {
+                    whether();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                MyAdapter adapter = new MyAdapter
+
             }
         });
     }
