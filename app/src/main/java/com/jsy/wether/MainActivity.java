@@ -43,8 +43,6 @@ public class MainActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
-                MyAdapter adapter = new MyAdapter
-
             }
         });
     }
@@ -80,17 +78,7 @@ public class MainActivity extends AppCompatActivity {
         conn.disconnect();
         //System.out.println(sb.toString());
         Log.i("mytag",sb.toString());
-        //jParsing(sb.toString());
+
     }
 
-    /*void jParsing(String data){
-        JSONObject jobj = new JSONObject(data);
-        JSONObject jobj1 = jobj.getJSONObject("getWhether");
-        JSONArray jArray = jobj1.getJSONArray("item");
-
-        for(int i =0;i<jArray.length();i++){
-            JSONObject jobj2 = jArray.getJSONObject(i);
-            String name = jobj2.getString("")
-        }
-    }*/
 }
