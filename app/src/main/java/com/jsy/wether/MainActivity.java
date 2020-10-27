@@ -43,8 +43,6 @@ public class MainActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
-                MyAdapter adapter = new MyAdapter
-
             }
         });
     }
