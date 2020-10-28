@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public static void whether() throws IOException {
+    public void whether() throws IOException {
         StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/1360000/VilageFcstInfoService/getUltraSrtNcst"); /*URL*/
         urlBuilder.append("?" + URLEncoder.encode("ServiceKey","UTF-8") + "=j3VbMNWCQKFxaQ4nRw2%2BX4%2BGMdddZQerxp6RIpyU78DGfBiVwnHli4vXdpIn9ldST%2FXHZ6ahHUw16ieG7ynh7g%3D%3D"); /*Service Key*/
         urlBuilder.append("&" + URLEncoder.encode("ServiceKey","UTF-8") + "=" + URLEncoder.encode("-", "UTF-8")); /*공공데이터포털에서 받은 인증키*/
@@ -80,14 +80,15 @@ public class MainActivity extends AppCompatActivity {
         conn.disconnect();
         //System.out.println(sb.toString());
         Log.i("mytag",sb.toString());
+        jParsing(sb.toString());
 
     }
     void jParsing(String data){
 
         try {
             JSONObject jobj = new JSONObject(data);
-            JSONObject jobj1 = jobj.getJSONObject("");
-            JSONArray jArray = jobj1.getJSONArray("");
+            JSONObject jobj1 = jobj.getJSONObject("getVilageFcst");
+            JSONArray jArray = jobj1.getJSONArray("item");
 
             for(int i=0;i<jArray.length();i++){
                 JSONObject jobj2 = jArray.getJSONObject(i);
