@@ -34,14 +34,16 @@ public class MainActivity extends AppCompatActivity {
                 Thread t = new Thread(new Runnable() {
                     @Override
                     public void run() {
+
+                        try {
+                            whether();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                     }
                 });
                 t.start();
-                try {
-                    whether();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+
 
             }
         });
@@ -49,12 +51,12 @@ public class MainActivity extends AppCompatActivity {
 
     public static void whether() throws IOException {
         StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/1360000/VilageFcstInfoService/getUltraSrtNcst"); /*URL*/
-        urlBuilder.append("?" + URLEncoder.encode("ServiceKey","UTF-8") + "=%2B%2BMyeDDAz0gFPiHloxF9Th1HrSx9Hq6agt5%2F7Jnv%2BHuqqFaVExC%2FfigaDBi6WszJFuUPLfEohtKk7ELKd0tyTA%3D%3D"); /*Service Key*/
+        urlBuilder.append("?" + URLEncoder.encode("ServiceKey","UTF-8") + "=j3VbMNWCQKFxaQ4nRw2%2BX4%2BGMdddZQerxp6RIpyU78DGfBiVwnHli4vXdpIn9ldST%2FXHZ6ahHUw16ieG7ynh7g%3D%3D"); /*Service Key*/
         urlBuilder.append("&" + URLEncoder.encode("ServiceKey","UTF-8") + "=" + URLEncoder.encode("-", "UTF-8")); /*공공데이터포털에서 받은 인증키*/
         urlBuilder.append("&" + URLEncoder.encode("pageNo","UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); /*페이지번호*/
         urlBuilder.append("&" + URLEncoder.encode("numOfRows","UTF-8") + "=" + URLEncoder.encode("10", "UTF-8")); /*한 페이지 결과 수*/
         urlBuilder.append("&" + URLEncoder.encode("dataType","UTF-8") + "=" + URLEncoder.encode("XML", "UTF-8")); /*요청자료형식(XML/JSON)Default: XML*/
-        urlBuilder.append("&" + URLEncoder.encode("base_date","UTF-8") + "=" + URLEncoder.encode("20151201", "UTF-8")); /*15년 12월 1일 발표*/
+        urlBuilder.append("&" + URLEncoder.encode("base_date","UTF-8") + "=" + URLEncoder.encode("20201028", "UTF-8")); /*15년 12월 1일 발표*/
         urlBuilder.append("&" + URLEncoder.encode("base_time","UTF-8") + "=" + URLEncoder.encode("0600", "UTF-8")); /*06시 발표(정시단위)*/
         urlBuilder.append("&" + URLEncoder.encode("nx","UTF-8") + "=" + URLEncoder.encode("18", "UTF-8")); /*예보지점의 X 좌표값*/
         urlBuilder.append("&" + URLEncoder.encode("ny","UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); /*예보지점 Y 좌표*/
