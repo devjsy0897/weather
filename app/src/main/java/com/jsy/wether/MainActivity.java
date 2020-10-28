@@ -54,10 +54,10 @@ public class MainActivity extends AppCompatActivity {
         urlBuilder.append("?" + URLEncoder.encode("ServiceKey","UTF-8") + "=j3VbMNWCQKFxaQ4nRw2%2BX4%2BGMdddZQerxp6RIpyU78DGfBiVwnHli4vXdpIn9ldST%2FXHZ6ahHUw16ieG7ynh7g%3D%3D"); /*Service Key*/
         urlBuilder.append("&" + URLEncoder.encode("ServiceKey","UTF-8") + "=" + URLEncoder.encode("-", "UTF-8")); /*공공데이터포털에서 받은 인증키*/
         urlBuilder.append("&" + URLEncoder.encode("pageNo","UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); /*페이지번호*/
-        urlBuilder.append("&" + URLEncoder.encode("numOfRows","UTF-8") + "=" + URLEncoder.encode("10", "UTF-8")); /*한 페이지 결과 수*/
+        urlBuilder.append("&" + URLEncoder.encode("numOfRows","UTF-8") + "=" + URLEncoder.encode("14", "UTF-8")); /*한 페이지 결과 수*/
         urlBuilder.append("&" + URLEncoder.encode("dataType","UTF-8") + "=" + URLEncoder.encode("XML", "UTF-8")); /*요청자료형식(XML/JSON)Default: XML*/
         urlBuilder.append("&" + URLEncoder.encode("base_date","UTF-8") + "=" + URLEncoder.encode("20201028", "UTF-8")); /*15년 12월 1일 발표*/
-        urlBuilder.append("&" + URLEncoder.encode("base_time","UTF-8") + "=" + URLEncoder.encode("0600", "UTF-8")); /*06시 발표(정시단위)*/
+        urlBuilder.append("&" + URLEncoder.encode("base_time","UTF-8") + "=" + URLEncoder.encode("1000", "UTF-8")); /*06시 발표(정시단위)*/
         urlBuilder.append("&" + URLEncoder.encode("nx","UTF-8") + "=" + URLEncoder.encode("18", "UTF-8")); /*예보지점의 X 좌표값*/
         urlBuilder.append("&" + URLEncoder.encode("ny","UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); /*예보지점 Y 좌표*/
         URL url = new URL(urlBuilder.toString());
@@ -82,5 +82,32 @@ public class MainActivity extends AppCompatActivity {
         Log.i("mytag",sb.toString());
 
     }
+    void jParsing(String data){
 
+        try {
+            JSONObject jobj = new JSONObject(data);
+            JSONObject jobj1 = jobj.getJSONObject("");
+            JSONArray jArray = jobj1.getJSONArray("");
+
+            for(int i=0;i<jArray.length();i++){
+                JSONObject jobj2 = jArray.getJSONObject(i);
+                String rainPer = jobj2.getString("POP");
+                String rainCo = jobj2.getString("PTY");
+                String rainSix  = jobj2.getString("R06");
+                String humid = jobj2.getString("REH");
+                String snowSix = jobj2.getString("S06");
+                String sky = jobj2.getString("SKY");
+                String morTem = jobj2.getString("T3H");
+                String dayTem = jobj2.getString("TMX");
+                String ewWind = jobj2.getString("UUU");
+                String snWind = jobj2.getString("VVV");
+                String wav  = jobj2.getString("WAV");
+                String winDir = jobj2.getString("VEC");
+                String winPo = jobj2.getString("WSD");
+
+            }
+
+        }catch (Exception e){ }
+
+    }
 }
