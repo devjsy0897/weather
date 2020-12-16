@@ -1,4 +1,4 @@
-package com.jsy.wether;
+package com.jsy.wheather;
 
 import org.junit.Test;
 
