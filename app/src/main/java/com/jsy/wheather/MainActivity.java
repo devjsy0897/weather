@@ -57,9 +57,21 @@ public class MainActivity2 extends AppCompatActivity {
                 sqlDB = myHelper.getReadableDatabase();
                 Cursor cursor;
                 date = new Date(System.currentTimeMillis());
-                SimpleDateFormat time = new SimpleDateFormat("HHMM");
+                SimpleDateFormat time = new SimpleDateFormat("HHmm");
 
-                if(200<=Integer.parseInt(time.format(date))){
+                /*
+                시간 알고리즘
+                Base_time : 200, 500, 800, 1100, 1400, 1700, 2000, 2300 (1일 8회)
+                현재시간<200 -> where fcstDate-1 and 2300=fcstTime
+                현재시간<500 -> where 200=fcstTime
+                현재시간<800 -> where 500=fcstTime
+                현재시간<1100 -> where 800=fcstTime
+                현재시간<1400 -> where 1100=fcstTime
+                현재시간<1700 -> where 1400=fcstTime
+                현재시간<2000 -> where 1700=fcstTime
+                현재시간<2300 -> where 2000=fcstTime
+                 */
+                if(Integer.parseInt(time.format(date))<500){
                     cursor = sqlDB.rawQuery("Select * from village where 200=fcstTime;", null);
 
                  String fvale = "";
@@ -93,7 +105,7 @@ public class MainActivity2 extends AppCompatActivity {
                 sqlDB.close();
                 Log.i("testtest",Integer.parseInt(time.format(date))+"");
 
-                }else if(1100<=Integer.parseInt(time.format(date))){
+                }else if(Integer.parseInt(time.format(date))<2200){
                     cursor = sqlDB.rawQuery("Select * from village where 1100=fcstTime;", null);
 
                     String fvale = "";
@@ -166,7 +178,6 @@ public class MainActivity2 extends AppCompatActivity {
     public void wheather() throws IOException {
         for(int i=1;i<25;i++) {
             StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/1360000/VilageFcstInfoService/getVilageFcst"); /*URL*/
-
             urlBuilder.append("&" + URLEncoder.encode("ServiceKey", "UTF-8") + "=" + URLEncoder.encode("-", "UTF-8")); /*공공데이터포털에서 받은 인증키*/
             urlBuilder.append("&" + URLEncoder.encode("pageNo", "UTF-8") + "=" + URLEncoder.encode(i+"", "UTF-8")); /*페이지번호*/
             urlBuilder.append("&" + URLEncoder.encode("numOfRows", "UTF-8") + "=" + URLEncoder.encode("10", "UTF-8")); /*한 페이지 결과 수*/
