@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -32,7 +33,7 @@ import java.util.Date;
 public class MainActivity2 extends AppCompatActivity {
     ArrayList<String> list;
     TextView tvdeg,tvcom1;
-    Button btndeg;
+    Button btndeg,btncome;
     SQLiteDatabase sqlDB;
     myDBHelper myHelper;
     Date date;
@@ -43,14 +44,41 @@ public class MainActivity2 extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         setTitle("weather");
 
-
         tvdeg = (TextView)findViewById(R.id.tvdeg);
         tvcom1 = (TextView)findViewById(R.id.tvcom1);
         btndeg = (Button)findViewById(R.id.btndeg);
-
-
+        btncome = (Button)findViewById(R.id.btncome);
+        list = new ArrayList<>();
 
         myHelper = new myDBHelper(this);
+
+        //불러오기 버튼 눌렀을 때↓
+        btncome.setOnClickListener(new View.OnClickListener() {
+
+            //인터넷 연결을 위한 쓰레드↓
+            @Override
+            public void onClick(View v) {
+                sqlDB = myHelper.getWritableDatabase();
+                myHelper.onUpgrade(sqlDB,1,2);
+                Thread t = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        try {
+                            weather();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+                t.start();
+
+
+            }
+            //인터넷 연결을 위한 쓰레드↑
+        });
+        //불러오기 버튼 눌렀을 때↑
+
         btndeg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -74,36 +102,36 @@ public class MainActivity2 extends AppCompatActivity {
                 if(Integer.parseInt(time.format(date))<500){
                     cursor = sqlDB.rawQuery("Select * from village where 200=fcstTime;", null);
 
-                 String fvale = "";
+                    String fvale = "";
 
-                while (cursor.moveToNext()){
+                    while (cursor.moveToNext()){
 
-                    fvale += cursor.getString(5);
-                }
+                        fvale += cursor.getString(5);
+                    }
 
-                tvdeg.setText(fvale);
-                if(Integer.parseInt(fvale)<0) {
-                    tvcom1.setText("영하에요!");
-                }else if(Integer.parseInt(fvale)<9){
-                    tvcom1.setText("추워요!");
-                }else if(Integer.parseInt(fvale)<15){
-                    tvcom1.setText("쌀쌀해요!");
-                }else if(Integer.parseInt(fvale)<20){
-                    tvcom1.setText("선선해요!");
-                }else if(Integer.parseInt(fvale)<25){
-                    tvcom1.setText("따뜻해요!");
-                }else if(Integer.parseInt(fvale)<30){
-                    tvcom1.setText("약간 더워요!");
-                }else if(30<Integer.parseInt(fvale)){
-                    tvcom1.setText("더워요!");
-                }
-                else{
-                    tvcom1.setText("무언가 오류!");
-                }
+                    tvdeg.setText(fvale);
+                    if(Integer.parseInt(fvale)<0) {
+                        tvcom1.setText("영하에요!");
+                    }else if(Integer.parseInt(fvale)<9){
+                        tvcom1.setText("추워요!");
+                    }else if(Integer.parseInt(fvale)<15){
+                        tvcom1.setText("쌀쌀해요!");
+                    }else if(Integer.parseInt(fvale)<20){
+                        tvcom1.setText("선선해요!");
+                    }else if(Integer.parseInt(fvale)<25){
+                        tvcom1.setText("따뜻해요!");
+                    }else if(Integer.parseInt(fvale)<30){
+                        tvcom1.setText("약간 더워요!");
+                    }else if(30<Integer.parseInt(fvale)){
+                        tvcom1.setText("더워요!");
+                    }
+                    else{
+                        tvcom1.setText("무언가 오류!");
+                    }
 
-                cursor.close();
-                sqlDB.close();
-                Log.i("testtest",Integer.parseInt(time.format(date))+"");
+                    cursor.close();
+                    sqlDB.close();
+                    Log.i("testtest",Integer.parseInt(time.format(date))+"");
 
                 }else if(Integer.parseInt(time.format(date))<2200){
                     cursor = sqlDB.rawQuery("Select * from village where 1100=fcstTime;", null);
@@ -142,48 +170,26 @@ public class MainActivity2 extends AppCompatActivity {
             }
         });
 
-        //광고
+
+        //광고↓
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
             @Override
             public void onInitializationComplete(InitializationStatus initializationStatus) {
 
             }
         });
-        //광고
-
-        Button btn = findViewById(R.id.btn);
-        list = new ArrayList<>();
-
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Thread t = new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-
-                        try {
-                            wheather();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                });
-                t.start();
-
-
-            }
-        });
+        //광고↑
     }
 
-    public void wheather() throws IOException {
-        for(int i=1;i<25;i++) {
+    public void weather() throws IOException {
+        for(int i=1;i<100;i++) {
             StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/1360000/VilageFcstInfoService/getVilageFcst"); /*URL*/
             urlBuilder.append("&" + URLEncoder.encode("ServiceKey", "UTF-8") + "=" + URLEncoder.encode("-", "UTF-8")); /*공공데이터포털에서 받은 인증키*/
             urlBuilder.append("&" + URLEncoder.encode("pageNo", "UTF-8") + "=" + URLEncoder.encode(i+"", "UTF-8")); /*페이지번호*/
-            urlBuilder.append("&" + URLEncoder.encode("numOfRows", "UTF-8") + "=" + URLEncoder.encode("10", "UTF-8")); /*한 페이지 결과 수*/
+            urlBuilder.append("&" + URLEncoder.encode("numOfRows", "UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); /*한 페이지 결과 수*/
             urlBuilder.append("&" + URLEncoder.encode("dataType", "UTF-8") + "=" + URLEncoder.encode("JSON", "UTF-8")); /*요청자료형식(XML/JSON)Default: XML*/
-            urlBuilder.append("&" + URLEncoder.encode("base_date", "UTF-8") + "=" + URLEncoder.encode("20201217", "UTF-8")); /*15년 12월 1일 발표*/
-            urlBuilder.append("&" + URLEncoder.encode("base_time", "UTF-8") + "=" + URLEncoder.encode("0230", "UTF-8")); /*06시 발표(정시단위)*/
+            urlBuilder.append("&" + URLEncoder.encode("base_date", "UTF-8") + "=" + URLEncoder.encode("20201219", "UTF-8")); /*15년 12월 1일 발표*/
+            urlBuilder.append("&" + URLEncoder.encode("base_time", "UTF-8") + "=" + URLEncoder.encode("0200", "UTF-8")); /*06시 발표(정시단위)*/
             urlBuilder.append("&" + URLEncoder.encode("nx", "UTF-8") + "=" + URLEncoder.encode("55", "UTF-8")); /*예보지점의 X 좌표값*/
             urlBuilder.append("&" + URLEncoder.encode("ny", "UTF-8") + "=" + URLEncoder.encode("127", "UTF-8")); /*예보지점 Y 좌표*/
 
@@ -206,9 +212,58 @@ public class MainActivity2 extends AppCompatActivity {
             conn.disconnect();
             //Log.i("myfirst", sb.toString());
             jParsing(sb.toString());
-            Log.i("mytag",sb.toString());
+            Log.i("mytag11",sb.toString());
         }
     }
+
+    /*void jParsing(String data){
+        try {
+            //JSONObject jobj = new JSONObject(data);
+            //JSONObject jobj1 = jobj.getJSONObject("getVilageFcst");
+            String data1 = data.substring(data.indexOf('['),data.indexOf(']')+1);
+            StringBuffer result = new StringBuffer();
+
+            JSONArray jArray = new JSONArray(data1);
+            //Log.i("mytag11",jArray+"");
+
+            *//*JSONObject root = (JSONObject)new JSONTokener(data).nextValue();
+            JSONArray array = new JSONArray(root.getString("response"));
+
+            String category = array.getJSONObject(0).getJSONObject("body").getString("baseDate");*//*
+
+            for(int i=0; i < jArray.length(); i++){
+                JSONObject jObject = jArray.getJSONObject(i);  // JSONObject 추출
+
+                int baseDate = jObject.getInt("baseDate");
+                int baseTime = jObject.getInt("baseTime");
+                String cat = jObject.getString("category");
+                int fcstDate = jObject.getInt("fcstDase");
+                int fcstTime = jObject.getInt("fcstTime");
+                String fcstValue = jObject.getString("fcstValue");
+                int nx = jObject.getInt("nx");
+                int ny = jObject.getInt("ny");
+
+                result.append(
+                        "기준날짜:" + baseDate +
+                        "기준시간:" + baseTime +
+                        "카테고리:" + cat +
+                        "목표날짜:" + fcstDate +
+                        "목표시간:" + fcstTime +
+                        "값:" + fcstValue +
+                        "nx:" + nx +
+                        "ny:" + ny + "\n"
+                );
+
+
+            }
+            Log.i("mytag12",result.toString());
+
+
+
+
+        }catch (Exception e){ Log.i("mytag",e.getLocalizedMessage());}
+
+    }*/
     void jParsing(String data){
 
         try {
@@ -222,24 +277,39 @@ public class MainActivity2 extends AppCompatActivity {
 
             /*JSONObject root = (JSONObject)new JSONTokener(data).nextValue();
             JSONArray array = new JSONArray(root.getString("response"));
-
             String category = array.getJSONObject(0).getJSONObject("body").getString("baseDate");*/
 
             for(int i=0; i < jArray.length(); i++){
                 JSONObject jObject = jArray.getJSONObject(i);  // JSONObject 추출
-                int date = jObject.getInt("baseDate");
-                int basetime = jObject.getInt("baseTime");
-                int fcst = jObject.getInt("fcstTime");
+                int bdate = jObject.getInt("baseDate");
+                int btime = jObject.getInt("baseTime");
                 String cat = jObject.getString("category");
+                int fdate = jObject.getInt("fcstDate");
+                int ftime = jObject.getInt("fcstTime");
+                String fval = jObject.getString("fcstValue");
+                int nx = jObject.getInt("nx");
+                int ny = jObject.getInt("ny");
 
                 result.append(
-                        "날짜:" + date +
-                                "기준시간:" + basetime +
-                                "목표시간:" + fcst +
-                                "카테고리:" + cat + "\n"
+                        bdate/* +
+                                "" + btime +
+                                ", '" + cat +
+                                "' ," + fdate +
+                                "," + ftime +
+                                ", '" + fval +
+                                "'," + nx +
+                                "," + ny*/
+
                 );
+                int num1 = 0;
+                Log.i("mytag12",bdate+"");
+                sqlDB = myHelper.getWritableDatabase();
+                sqlDB.execSQL("insert into village(baseDate/*, baseTime, category, fcstDate, fcstTime, fcstValue, nx,ny*/) VALUES (0);");
+                sqlDB.close();
+                Toast.makeText(getApplicationContext(), "입력됨", Toast.LENGTH_SHORT).show();
             }
-            Log.i("mytag11",result.toString());
+            //Log.i("mytag12",result.toString());
+
 
 
 
@@ -247,6 +317,9 @@ public class MainActivity2 extends AppCompatActivity {
         }catch (Exception e){ Log.i("mytag",e.getLocalizedMessage());}
 
     }
+
+
+    //DB 생성 클래스↓ (쓰레드 직전에 호출함)
     public class myDBHelper extends SQLiteOpenHelper {
         public myDBHelper(Context context){
             super(context, "weather", null, 1);
@@ -254,7 +327,7 @@ public class MainActivity2 extends AppCompatActivity {
 
         @Override
         public void onCreate(SQLiteDatabase db) {
-            db.execSQL("Create table village(baseDate Integer , baseTime Integer, category char, fcstDate Integer, fcstValue char, nx Integer, ny Integer);");
+            db.execSQL("Create table village(baseDate Integer , baseTime Integer, category char, fcstDate Integer, fcstTime Integer, fcstValue char, nx Integer, ny Integer);");
         }
 
         @Override
@@ -263,7 +336,7 @@ public class MainActivity2 extends AppCompatActivity {
             onCreate(db);
         }
     }
-
+    //DB 생성 클래스↑
 }
 
 /*
