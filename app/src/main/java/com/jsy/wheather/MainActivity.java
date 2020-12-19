@@ -291,20 +291,20 @@ public class MainActivity2 extends AppCompatActivity {
                 int ny = jObject.getInt("ny");
 
                 result.append(
-                        bdate/* +
-                                "" + btime +
-                                ", '" + cat +
-                                "' ," + fdate +
-                                "," + ftime +
-                                ", '" + fval +
-                                "'," + nx +
-                                "," + ny*/
+                        "기준날짜 : " + bdate +
+                                ", 기준시간 : " + btime +
+                                ", 카테고리 : " + cat +
+                                " , 목표날짜 : " + fdate +
+                                " , 목표시간 : " + ftime +
+                                " , 목푯값 : " + fval +
+                                " , x축 : " + nx +
+                                " , y축 : " + ny
 
                 );
-                int num1 = 0;
-                Log.i("mytag12",bdate+"");
+                Log.i("mytag12",result+"");
                 sqlDB = myHelper.getWritableDatabase();
-                sqlDB.execSQL("insert into village(baseDate/*, baseTime, category, fcstDate, fcstTime, fcstValue, nx,ny*/) VALUES (0);");
+                sqlDB.execSQL("insert into village(baseDate, baseTime, category, fcstDate, fcstTime, fcstValue, nx,ny) " +
+                        "VALUES ('"+bdate+"','"+btime+"','"+cat+"','"+fdate+"','"+ftime+"','"+fval+"','"+nx+"','"+ny+"');");
                 sqlDB.close();
                 Toast.makeText(getApplicationContext(), "입력됨", Toast.LENGTH_SHORT).show();
             }
