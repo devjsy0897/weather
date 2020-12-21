@@ -1,20 +1,18 @@
 package com.jsy.wheather;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
-import android.util.JsonToken;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.initialization.InitializationStatus;
@@ -22,28 +20,25 @@ import com.google.android.gms.ads.initialization.OnInitializationCompleteListene
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.json.JSONTokener;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Map;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity2 extends AppCompatActivity {
     ArrayList<String> list;
-    TextView tvdeg,tvcom1;
-    Button btndeg,btncome;
+    TextView tvdeg,tvcom1,tvloc;
+    Button btndeg,btncome,btnvlist;
     SQLiteDatabase sqlDB;
     myDBHelper myHelper;
     Date date;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,11 +48,27 @@ public class MainActivity extends AppCompatActivity {
 
         tvdeg = (TextView)findViewById(R.id.tvdeg);
         tvcom1 = (TextView)findViewById(R.id.tvcom1);
+        tvloc = (TextView)findViewById(R.id.tvloc);
         btndeg = (Button)findViewById(R.id.btndeg);
         btncome = (Button)findViewById(R.id.btncome);
+        btnvlist = (Button)findViewById(R.id.btnvlist);
+
         list = new ArrayList<>();
 
+
         myHelper = new myDBHelper(this);
+
+        //지역선택 버튼 눌렀을 때 ↓
+        btnvlist.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), ListActivity.class);
+                startActivity(intent);
+
+            }
+        });
+        //지역선택 버튼 눌렀을 때 ↑
+
 
         //새로고침 버튼 눌렀을 때↓
         btncome.setOnClickListener(new View.OnClickListener() {
@@ -115,10 +126,12 @@ public class MainActivity extends AppCompatActivity {
                         fvale += cursor.getString(5);
                     }
 
+
+
                     tvdeg.setText(fvale);
                     if(Integer.parseInt(fvale)<0) {
                         tvcom1.setText("영하에요!");
-                    }/*else if(Integer.parseInt(fvale)<9){
+                    }else if(Integer.parseInt(fvale)<9){
                         tvcom1.setText("추워요!");
                     }else if(Integer.parseInt(fvale)<15){
                         tvcom1.setText("쌀쌀해요!");
@@ -130,7 +143,7 @@ public class MainActivity extends AppCompatActivity {
                         tvcom1.setText("약간 더워요!");
                     }else if(30<=Integer.parseInt(fvale)){
                         tvcom1.setText("더워요!");
-                    }*/
+                    }
                     else{
                         tvcom1.setText("무언가 오류!");
                     }
@@ -152,17 +165,19 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         //광고↑
+
+
+
     }
 
     public void weather() throws IOException {
         for(int i=1;i<200;i++) {
             StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/1360000/VilageFcstInfoService/getVilageFcst"); /*URL*/
-            urlBuilder.append("?" + URLEncoder.encode("ServiceKey", "UTF-8") + "=j3VbMNWCQKFxaQ4nRw2%2BX4%2BGMdddZQerxp6RIpyU78DGfBiVwnHli4vXdpIn9ldST%2FXHZ6ahHUw16ieG7ynh7g%3D%3D"); /*Service Key*/
             //urlBuilder.append("&" + URLEncoder.encode("ServiceKey", "UTF-8") + "=" + URLEncoder.encode("-", "UTF-8")); /*공공데이터포털에서 받은 인증키*/
             urlBuilder.append("&" + URLEncoder.encode("pageNo", "UTF-8") + "=" + URLEncoder.encode(i+"", "UTF-8")); /*페이지번호*/
             urlBuilder.append("&" + URLEncoder.encode("numOfRows", "UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); /*한 페이지 결과 수*/
             urlBuilder.append("&" + URLEncoder.encode("dataType", "UTF-8") + "=" + URLEncoder.encode("JSON", "UTF-8")); /*요청자료형식(XML/JSON)Default: XML*/
-            urlBuilder.append("&" + URLEncoder.encode("base_date", "UTF-8") + "=" + URLEncoder.encode("20201220", "UTF-8")); /*15년 12월 1일 발표*/
+            urlBuilder.append("&" + URLEncoder.encode("base_date", "UTF-8") + "=" + URLEncoder.encode("20201221", "UTF-8")); /*15년 12월 1일 발표*/
             urlBuilder.append("&" + URLEncoder.encode("base_time", "UTF-8") + "=" + URLEncoder.encode("0200", "UTF-8")); /*06시 발표(정시단위)*/
             urlBuilder.append("&" + URLEncoder.encode("nx", "UTF-8") + "=" + URLEncoder.encode("55", "UTF-8")); /*예보지점의 X 좌표값*/
             urlBuilder.append("&" + URLEncoder.encode("ny", "UTF-8") + "=" + URLEncoder.encode("127", "UTF-8")); /*예보지점 Y 좌표*/
@@ -288,7 +303,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        }catch (Exception e){ Log.i("mytag",e.getLocalizedMessage());}
+        }catch (Exception e){ Log.i("mytagcatch",e.getLocalizedMessage());}
 
     }
 

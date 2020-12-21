@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/layout"
     tools:context=".MainActivity">
 
 
@@ -23,17 +24,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <TextView
+        <Button
+            android:id="@+id/btnvlist"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="사상구"
-            android:textSize="20dp" />
+            android:text="지역선택"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="해운대구"
-            android:textSize="20dp" />
     </LinearLayout>
 
     <LinearLayout
@@ -42,34 +38,55 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/tvcom1"
+            android:id="@+id/tvloc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
+            android:textSize="20dp"
+            android:textColor="#000000"
+            android:gravity="center"/>
+        <TextView
+            android:id="@+id/tvcom1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:gravity="center"
-
-            android:textSize="35dp" />
+            android:textSize="35dp"
+            android:textColor="#000000"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="외투를 챙기세요."
-            android:textSize="30dp" />
+            android:textSize="30dp"
+            android:textColor="#000000"/>
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal">
         <TextView
             android:id="@+id/tvdeg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:textSize="70dp" />
 
+            android:textSize="70dp"
+            android:textColor="#000000"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="℃"
+                android:textSize="70dp"
+                android:textColor="#000000"/>
+        </LinearLayout>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:text="흐림"
-            android:textSize="30dp" />
+            android:textSize="30dp"
+            android:textColor="#000000"/>
     </LinearLayout>
 
     <LinearLayout
