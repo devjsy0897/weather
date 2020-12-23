@@ -3,6 +3,7 @@ package com.jsy.wheather;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
@@ -40,13 +41,19 @@ import java.util.Date;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
+
+    public static final int REQUEST_CODE = 100;
+
     ArrayList<String> list;
-    TextView tvdeg,tvcom1,tvloc;
+    TextView tvdeg,tvcom1;
     Button btndeg,btncome,btnvlist;
     SQLiteDatabase sqlDB;
     myDBHelper myHelper;
     Date date;
+    String locnx;
+    String locny;
 
+    private TextView tvloc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
 
         tvdeg = (TextView)findViewById(R.id.tvdeg);
         tvcom1 = (TextView)findViewById(R.id.tvcom1);
-        tvloc = (TextView)findViewById(R.id.tvloc);
+
         btndeg = (Button)findViewById(R.id.btndeg);
         btncome = (Button)findViewById(R.id.btncome);
         btnvlist = (Button)findViewById(R.id.btnvlist);
@@ -64,12 +71,13 @@ public class MainActivity extends AppCompatActivity {
         myHelper = new myDBHelper(this);
         date = new Date(System.currentTimeMillis());
 
+        tvloc = (TextView)findViewById(R.id.tvloc);
         //지역선택 버튼 눌렀을 때 ↓
         btnvlist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), ListActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent,REQUEST_CODE);
 
             }
         });
@@ -123,12 +131,13 @@ public class MainActivity extends AppCompatActivity {
                 현재시간<2300 -> where 2000=fcstTime
                  */
 
-                if(Integer.parseInt(time.format(date))<2200){
-                    cursor = sqlDB.rawQuery("Select * from village where fcstDate=baseDate and fcstTime=1800 and category='T3H';", null);
+                //if(Integer.parseInt(time.format(date))<1700){
+                    cursor = sqlDB.rawQuery("Select * from village where fcstDate=baseDate and fcstTime=1500 and category='T3H';", null);
                     String fvale = "";
 
                     while (cursor.moveToNext()){
                         fvale += cursor.getString(5);
+                        Log.i("fvaletest",fvale);
                     }
 
 
@@ -158,7 +167,7 @@ public class MainActivity extends AppCompatActivity {
 
                 }
 
-            }
+            //}
         });
 
 
@@ -173,11 +182,12 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
     }
     public void weather() throws IOException {
         SimpleDateFormat fourteen_format = new SimpleDateFormat("yyyyMMdd");
         Log.i("timetest",Integer.parseInt(fourteen_format.format(date))+"");
-        for(int i=1;i<200;i++) {
+        for(int i=1;i<150;i++) {
             StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/1360000/VilageFcstInfoService/getVilageFcst"); /*URL*/
             urlBuilder.append("?" + URLEncoder.encode("ServiceKey", "UTF-8") + "=j3VbMNWCQKFxaQ4nRw2%2BX4%2BGMdddZQerxp6RIpyU78DGfBiVwnHli4vXdpIn9ldST%2FXHZ6ahHUw16ieG7ynh7g%3D%3D"); /*Service Key*/
             //urlBuilder.append("&" + URLEncoder.encode("ServiceKey", "UTF-8") + "=" + URLEncoder.encode("-", "UTF-8")); /*공공데이터포털에서 받은 인증키*/
@@ -186,8 +196,8 @@ public class MainActivity extends AppCompatActivity {
             urlBuilder.append("&" + URLEncoder.encode("dataType", "UTF-8") + "=" + URLEncoder.encode("JSON", "UTF-8")); /*요청자료형식(XML/JSON)Default: XML*/
             urlBuilder.append("&" + URLEncoder.encode("base_date", "UTF-8") + "=" + URLEncoder.encode(fourteen_format.format(date)+"", "UTF-8")); /*15년 12월 1일 발표*/
             urlBuilder.append("&" + URLEncoder.encode("base_time", "UTF-8") + "=" + URLEncoder.encode("0200", "UTF-8")); /*06시 발표(정시단위)*/
-            urlBuilder.append("&" + URLEncoder.encode("nx", "UTF-8") + "=" + URLEncoder.encode("55", "UTF-8")); /*예보지점의 X 좌표값*/
-            urlBuilder.append("&" + URLEncoder.encode("ny", "UTF-8") + "=" + URLEncoder.encode("127", "UTF-8")); /*예보지점 Y 좌표*/
+            urlBuilder.append("&" + URLEncoder.encode("nx", "UTF-8") + "=" + URLEncoder.encode(locnx+"", "UTF-8")); /*예보지점의 X 좌표값*/
+            urlBuilder.append("&" + URLEncoder.encode("ny", "UTF-8") + "=" + URLEncoder.encode(locny+"", "UTF-8")); /*예보지점 Y 좌표*/
 
             URL url = new URL(urlBuilder.toString());
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -212,103 +222,59 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    /*void jParsing(String data){
-        try {
-            //JSONObject jobj = new JSONObject(data);
-            //JSONObject jobj1 = jobj.getJSONObject("getVilageFcst");
-            String data1 = data.substring(data.indexOf('['),data.indexOf(']')+1);
-            StringBuffer result = new StringBuffer();
-
-            JSONArray jArray = new JSONArray(data1);
-            //Log.i("mytag11",jArray+"");
-
-            *//*JSONObject root = (JSONObject)new JSONTokener(data).nextValue();
-            JSONArray array = new JSONArray(root.getString("response"));
-
-            String category = array.getJSONObject(0).getJSONObject("body").getString("baseDate");*//*
-
-            for(int i=0; i < jArray.length(); i++){
-                JSONObject jObject = jArray.getJSONObject(i);  // JSONObject 추출
-
-                int baseDate = jObject.getInt("baseDate");
-                int baseTime = jObject.getInt("baseTime");
-                String cat = jObject.getString("category");
-                int fcstDate = jObject.getInt("fcstDase");
-                int fcstTime = jObject.getInt("fcstTime");
-                String fcstValue = jObject.getString("fcstValue");
-                int nx = jObject.getInt("nx");
-                int ny = jObject.getInt("ny");
-
-                result.append(
-                        "기준날짜:" + baseDate +
-                        "기준시간:" + baseTime +
-                        "카테고리:" + cat +
-                        "목표날짜:" + fcstDate +
-                        "목표시간:" + fcstTime +
-                        "값:" + fcstValue +
-                        "nx:" + nx +
-                        "ny:" + ny + "\n"
-                );
 
 
-            }
-            Log.i("mytag12",result.toString());
-
-
-
-
-        }catch (Exception e){ Log.i("mytag",e.getLocalizedMessage());}
-
-    }*/
     void jParsing(String data){
 
         try {
             //JSONObject jobj = new JSONObject(data);
             //JSONObject jobj1 = jobj.getJSONObject("getVilageFcst");
-            String data1 = data.substring(data.indexOf('['),data.indexOf(']')+1);
-            StringBuffer result = new StringBuffer();
 
-            JSONArray jArray = new JSONArray(data1);
-            //Log.i("mytag11",jArray+"");
+
+                    String data1 = data.substring(data.indexOf('['), data.indexOf(']') + 1);
+                    //data1 = data1.replace("{/","}#");
+                    //data1+="#";
+                    StringBuffer result = new StringBuffer();
+                    String[] dataArray=null;
+
+                    JSONArray jArray = new JSONArray(data1);
+                    Log.i("jtest",jArray.length()+"");
+                    //Log.i("mytag11",jArray+"");
 
             /*JSONObject root = (JSONObject)new JSONTokener(data).nextValue();
             JSONArray array = new JSONArray(root.getString("response"));
             String category = array.getJSONObject(0).getJSONObject("body").getString("baseDate");*/
 
-            for(int i=0; i < jArray.length(); i++){
-                JSONObject jObject = jArray.getJSONObject(i);  // JSONObject 추출
-                int bdate = jObject.getInt("baseDate");
-                int btime = jObject.getInt("baseTime");
-                String cat = jObject.getString("category");
-                int fdate = jObject.getInt("fcstDate");
-                int ftime = jObject.getInt("fcstTime");
-                String fval = jObject.getString("fcstValue");
-                int nx = jObject.getInt("nx");
-                int ny = jObject.getInt("ny");
+                    for (int i = 0; i < jArray.length(); i++) {
+                        JSONObject jObject = jArray.getJSONObject(i);  // JSONObject 추출
+                        int bdate = jObject.getInt("baseDate");
+                        int btime = jObject.getInt("baseTime");
+                        String cat = jObject.getString("category");
+                        int fdate = jObject.getInt("fcstDate");
+                        int ftime = jObject.getInt("fcstTime");
+                        String fval = jObject.getString("fcstValue");
+                        int nx = jObject.getInt("nx");
+                        int ny = jObject.getInt("ny");
 
-                result.append(
-                        "기준날짜 : " + bdate +
-                                ", 기준시간 : " + btime +
-                                ", 카테고리 : " + cat +
-                                " , 목표날짜 : " + fdate +
-                                " , 목표시간 : " + ftime +
-                                " , 목푯값 : " + fval +
-                                " , x축 : " + nx +
-                                " , y축 : " + ny
+                        result.append(
+                                "기준날짜 : " + bdate +
+                                        ", 기준시간 : " + btime +
+                                        ", 카테고리 : " + cat +
+                                        " , 목표날짜 : " + fdate +
+                                        " , 목표시간 : " + ftime +
+                                        " , 목푯값 : " + fval +
+                                        " , x축 : " + nx +
+                                        " , y축 : " + ny
 
-                );
-                Log.i("mytag12",result+"");
-                sqlDB = myHelper.getWritableDatabase();
-                sqlDB.execSQL("insert into village(baseDate, baseTime, category, fcstDate, fcstTime, fcstValue, nx,ny) " +
-                        "VALUES ('"+bdate+"','"+btime+"','"+cat+"','"+fdate+"','"+ftime+"','"+fval+"','"+nx+"','"+ny+"');");
-                sqlDB.close();
-                Toast.makeText(getApplicationContext(), "입력됨", Toast.LENGTH_SHORT).show();
-            }
+                        );
+                        Log.i("mytag13", result + "");
+                        sqlDB = myHelper.getWritableDatabase();
+                        sqlDB.execSQL("insert into village(baseDate, baseTime, category, fcstDate, fcstTime, fcstValue, nx,ny) " +
+                                "VALUES ('" + bdate + "','" + btime + "','" + cat + "','" + fdate + "','" + ftime + "','" + fval + "','" + nx + "','" + ny + "');");
+                        sqlDB.close();
+                        Toast.makeText(getApplicationContext(), "입력됨", Toast.LENGTH_SHORT).show();
+                    }
             //Log.i("mytag12",result.toString());
-
-
-
-
 
         }catch (Exception e){ Log.i("mytagcatch",e.getLocalizedMessage());}
 
@@ -333,6 +299,39 @@ public class MainActivity extends AppCompatActivity {
         }
     }
     //DB 생성 클래스↑
+
+    //intent로 지역 들고옴 ↓
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == REQUEST_CODE) {
+            if (resultCode != Activity.RESULT_OK) {
+                return;
+            }
+            String sendText = data.getExtras().getString("result");
+            Log.i("resulttest",sendText);
+            tvloc.setText(sendText+"");
+            String[] locarray = sendText.split("\\s");
+            Log.i("splittest",locarray[1]+"");
+            String level1 = locarray[1];
+            String level2 = locarray[2];
+            String level3 = locarray[3];
+            Cursor cursor2;
+            sqlDB = myHelper.getWritableDatabase();
+            cursor2 = sqlDB.rawQuery("Select nx,ny from vlist where level1='"+level1+"' and level2='"+level2+"' and level3='"+level3+"';", null);
+
+            while(cursor2.moveToNext()) {
+                locnx = cursor2.getString(0);
+                locny = cursor2.getString(1);
+                Log.i("nxtest", locnx);
+                Log.i("nxtest",locny);
+            }
+            cursor2.close();
+            sqlDB.close();
+        }
+    }
+    //intent로 지역 들고옴 ↑
 }
 
 /*

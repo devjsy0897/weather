@@ -25,7 +25,6 @@ public class ListActivity extends AppCompatActivity {
     private EditText editSearch;        // 검색어를 입력할 Input 창
     private SearchAdapter adapter;      // 리스트뷰에 연결할 아답터
     private ArrayList<String> arraylist;
-    Intent intent = getIntent();
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -83,9 +82,11 @@ public class ListActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Toast.makeText(getApplicationContext(),list.get(position),Toast.LENGTH_SHORT).show();
-                Log.i("clicktest", list.get(position));
-                //intent.putExtra("result",list.get(position));
-                //setResult(RESULT_OK,intent);
+                String val = list.get(position);
+                Log.i("clicktest", val);
+                Intent intent = new Intent();
+                intent.putExtra("result",val);
+                setResult(RESULT_OK,intent);
                 finish();
             }
         });
