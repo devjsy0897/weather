@@ -456,16 +456,16 @@ public class MainActivity2 extends AppCompatActivity {
             int[] ny = new int[10];
             String[] cat = new String[10];
             String[] fval = new String[10];
-                    for (int i = 0; i < 2; i++) {
+                    for (int i = 0; i < 10; i++) {
                         JSONObject jObject = jArray.getJSONObject(i);  // JSONObject 추출
-                        bdate[i] = jObject.getInt("baseDate0");
-                        btime[i] = jObject.getInt("baseTime0");
-                        cat[i] = jObject.getString("category0");
-                        fdate[i] = jObject.getInt("fcstDate0");
-                        ftime[i] = jObject.getInt("fcstTime0");
-                        fval[i] = jObject.getString("fcstValue0");
-                        nx[i] = jObject.getInt("nx0");
-                        ny[i] = jObject.getInt("ny0");
+                        bdate[i] = jObject.getInt("baseDate"+i);
+                        btime[i] = jObject.getInt("baseTime"+i);
+                        cat[i] = jObject.getString("category"+i);
+                        fdate[i] = jObject.getInt("fcstDate"+i);
+                        ftime[i] = jObject.getInt("fcstTime"+i);
+                        fval[i] = jObject.getString("fcstValue"+i);
+                        nx[i] = jObject.getInt("nx"+i);
+                        ny[i] = jObject.getInt("ny"+i);
 
                         result.append(
                                 "기준날짜 : " + bdate[i] +
@@ -477,14 +477,17 @@ public class MainActivity2 extends AppCompatActivity {
                                         " , x축 : " + nx[i] +
                                         " , y축 : " + ny[i]
                         );
-                        Log.i("mytag13", i+"번 "+result + "");
+                        Log.i("mytag13", i + "번 " + result + "");
+                    }
                         sqlDB = myHelper.getWritableDatabase();
+                    for(int i = 0;i<10;i++) {
                         sqlDB.execSQL("insert into village(baseDate, baseTime, category, fcstDate, fcstTime, fcstValue, nx,ny) " +
                                 "VALUES ('" + bdate[i] + "','" + btime[i] + "','" + cat[i] + "','" + fdate[i] + "','" + ftime[i] + "','" + fval[i] + "','" + nx[i] + "','" + ny[i] + "');");
+                    }
                         sqlDB.close();
                         //Toast.makeText(getApplicationContext(), "입력됨", Toast.LENGTH_SHORT).show();
 
-                    }
+
             //Log.i("mytag12",result.toString());
 
         }catch (Exception e){ Log.i("mytagcatch",e.getLocalizedMessage());}
