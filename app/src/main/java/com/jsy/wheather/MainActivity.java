@@ -12,7 +12,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -367,11 +366,11 @@ public class MainActivity2 extends AppCompatActivity {
     public void weather() throws IOException {
         SimpleDateFormat fourteen_format = new SimpleDateFormat("yyyyMMdd");
         Log.i("timetest",Integer.parseInt(fourteen_format.format(date))+"");
-        for(int i=1;i<150;i++) {
+        for(int i=1;i<10;i++) {
             StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/1360000/VilageFcstInfoService/getVilageFcst"); /*URL*/
             //urlBuilder.append("&" + URLEncoder.encode("ServiceKey", "UTF-8") + "=" + URLEncoder.encode("-", "UTF-8")); /*공공데이터포털에서 받은 인증키*/
             urlBuilder.append("&" + URLEncoder.encode("pageNo", "UTF-8") + "=" + URLEncoder.encode(i+"", "UTF-8")); /*페이지번호*/
-            urlBuilder.append("&" + URLEncoder.encode("numOfRows", "UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); /*한 페이지 결과 수*/
+            urlBuilder.append("&" + URLEncoder.encode("numOfRows", "UTF-8") + "=" + URLEncoder.encode("10", "UTF-8")); /*한 페이지 결과 수*/
             urlBuilder.append("&" + URLEncoder.encode("dataType", "UTF-8") + "=" + URLEncoder.encode("JSON", "UTF-8")); /*요청자료형식(XML/JSON)Default: XML*/
             urlBuilder.append("&" + URLEncoder.encode("base_date", "UTF-8") + "=" + URLEncoder.encode(fourteen_format.format(date)+"", "UTF-8")); /*15년 12월 1일 발표*/
             urlBuilder.append("&" + URLEncoder.encode("base_time", "UTF-8") + "=" + URLEncoder.encode("0200", "UTF-8")); /*06시 발표(정시단위)*/
@@ -411,47 +410,80 @@ public class MainActivity2 extends AppCompatActivity {
 
 
                     String data1 = data.substring(data.indexOf('['), data.indexOf(']') + 1);
-                    //data1 = data1.replace("{/","}#");
-                    //data1+="#";
-                    StringBuffer result = new StringBuffer();
                     String[] dataArray=null;
+            Log.i("datatest",data1);
+                    for(int jj=0;jj<10;jj++) {
+                        data1 = data1.replaceFirst("baseDate","!"+jj);
+                        data1 = data1.replaceFirst("baseTime","@"+jj);
+                        data1 = data1.replaceFirst("category","#"+jj);
+                        data1 = data1.replaceFirst("fcstDate","|"+jj);
+                        data1 = data1.replaceFirst("fcstTime","?"+jj);
+                        data1 = data1.replaceFirst("fcstValue","&"+jj);
+                        data1 = data1.replaceFirst("nx","[*]"+jj);
+                        data1 = data1.replaceFirst("ny","~"+jj);
+                    }
+                    Log.i("datatest1",data1);
+                    data1 = data1.replace("!","baseDate");
+                    data1 = data1.replace("@","baseTime");
+                    data1 = data1.replace("#","category");
+                    data1 = data1.replace("|","fcstDate");
+                    data1 = data1.replace("?","fcstTime");
+                    data1 = data1.replace("&","fcstValue");
+                    data1 = data1.replace("[*]","nx");
+                    data1 = data1.replace("~","ny");
+                    Log.i("datatest2",data1);
+                    /*for(int jjj=1;jjj<11;jjj++) {
+                        dataArray[jjj] =data1.substring(data1.indexOf(jjj+"{"), data1.indexOf("}"+jjj) + 1);
+                        Log.i("datatest1",dataArray[jjj]+"");
+                    }*/
 
-                    JSONArray jArray = new JSONArray(data1);
-                    Log.i("jtest",jArray.length()+"");
-                    //Log.i("mytag11",jArray+"");
+                        StringBuffer result = new StringBuffer();
+
+
+                            JSONArray jArray = new JSONArray(data1);
+                            Log.i("jtest", jArray.length() + "");
+                            Log.i("mytag12", jArray + "");
 
             /*JSONObject root = (JSONObject)new JSONTokener(data).nextValue();
             JSONArray array = new JSONArray(root.getString("response"));
             String category = array.getJSONObject(0).getJSONObject("body").getString("baseDate");*/
 
-                    for (int i = 0; i < jArray.length(); i++) {
+            int[] bdate = new int[10];
+            int[] btime = new int[10];
+            int[] fdate = new int[10];
+            int[] ftime = new int[10];
+            int[] nx = new int[10];
+            int[] ny = new int[10];
+            String[] cat = new String[10];
+            String[] fval = new String[10];
+                    for (int i = 0; i < 2; i++) {
                         JSONObject jObject = jArray.getJSONObject(i);  // JSONObject 추출
-                        int bdate = jObject.getInt("baseDate");
-                        int btime = jObject.getInt("baseTime");
-                        String cat = jObject.getString("category");
-                        int fdate = jObject.getInt("fcstDate");
-                        int ftime = jObject.getInt("fcstTime");
-                        String fval = jObject.getString("fcstValue");
-                        int nx = jObject.getInt("nx");
-                        int ny = jObject.getInt("ny");
+                        bdate[i] = jObject.getInt("baseDate0");
+                        btime[i] = jObject.getInt("baseTime0");
+                        cat[i] = jObject.getString("category0");
+                        fdate[i] = jObject.getInt("fcstDate0");
+                        ftime[i] = jObject.getInt("fcstTime0");
+                        fval[i] = jObject.getString("fcstValue0");
+                        nx[i] = jObject.getInt("nx0");
+                        ny[i] = jObject.getInt("ny0");
 
                         result.append(
-                                "기준날짜 : " + bdate +
-                                        ", 기준시간 : " + btime +
-                                        ", 카테고리 : " + cat +
-                                        " , 목표날짜 : " + fdate +
-                                        " , 목표시간 : " + ftime +
-                                        " , 목푯값 : " + fval +
-                                        " , x축 : " + nx +
-                                        " , y축 : " + ny
-
+                                "기준날짜 : " + bdate[i] +
+                                        ", 기준시간 : " + btime[i] +
+                                        ", 카테고리 : " + cat[i] +
+                                        " , 목표날짜 : " + fdate[i] +
+                                        " , 목표시간 : " + ftime[i] +
+                                        " , 목푯값 : " + fval[i] +
+                                        " , x축 : " + nx[i] +
+                                        " , y축 : " + ny[i]
                         );
-                        Log.i("mytag13", result + "");
+                        Log.i("mytag13", i+"번 "+result + "");
                         sqlDB = myHelper.getWritableDatabase();
                         sqlDB.execSQL("insert into village(baseDate, baseTime, category, fcstDate, fcstTime, fcstValue, nx,ny) " +
-                                "VALUES ('" + bdate + "','" + btime + "','" + cat + "','" + fdate + "','" + ftime + "','" + fval + "','" + nx + "','" + ny + "');");
+                                "VALUES ('" + bdate[i] + "','" + btime[i] + "','" + cat[i] + "','" + fdate[i] + "','" + ftime[i] + "','" + fval[i] + "','" + nx[i] + "','" + ny[i] + "');");
                         sqlDB.close();
-                        Toast.makeText(getApplicationContext(), "입력됨", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getApplicationContext(), "입력됨", Toast.LENGTH_SHORT).show();
+
                     }
             //Log.i("mytag12",result.toString());
 
@@ -508,6 +540,7 @@ public class MainActivity2 extends AppCompatActivity {
 
             Log.i("resulttest",sendText);
             tvloc.setText(sendText+"");
+            tvcom1.setText("");
             String[] locarray = new String[4];
             locarray[0]="";
             locarray[1]="";
