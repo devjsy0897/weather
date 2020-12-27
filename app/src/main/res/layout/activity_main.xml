@@ -37,14 +37,14 @@
             android:background="@drawable/button"
             android:text="지역선택"
             android:textColor="#000000"/>
-        <Button
+        <!--<Button
             android:id="@+id/btncome"
             android:layout_width="wrap_content"
             android:layout_height="35dp"
             android:layout_marginLeft="10dp"
             android:background="@drawable/button"
             android:text="새로고침"
-            android:textColor="#000000"/>
+            android:textColor="#000000"/>-->
 
 
 
@@ -60,7 +60,6 @@
             android:id="@+id/tvupdate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:gravity="center"
             android:text="↑ 지역선택을 해주세요"
             android:textColor="#FFF53B"
@@ -72,7 +71,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:layout_marginBottom="5dp"
             android:textSize="20dp"
             android:textColor="#000000"
             android:gravity="center"/>

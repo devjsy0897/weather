@@ -40,7 +40,7 @@ public class MainActivity2 extends AppCompatActivity {
 
     ArrayList<String> list;
     TextView tvdeg,tvcom1,tvcloth,tvupdate;
-    Button btncome,btnvlist;
+    Button /*btncome,*/btnvlist;
     SQLiteDatabase sqlDB,sqlDB2;
     myDBHelper myHelper,myHelper2;
     Date date,date1;
@@ -62,7 +62,7 @@ public class MainActivity2 extends AppCompatActivity {
         tvcloth = (TextView)findViewById(R.id.tvcloth);
         tvupdate = (TextView)findViewById(R.id.tvupdate);
 
-        btncome = (Button)findViewById(R.id.btncome);
+        //btncome = (Button)findViewById(R.id.btncome);
         btnvlist = (Button)findViewById(R.id.btnvlist);
 
         list = new ArrayList<>();
@@ -84,13 +84,13 @@ public class MainActivity2 extends AppCompatActivity {
         //지역선택 버튼 눌렀을 때 ↑
 
 
-        //새로고침 버튼 눌렀을 때↓
+        /*//새로고침 버튼 눌렀을 때↓
         btncome.setOnClickListener(new View.OnClickListener() {
 
             //인터넷 연결을 위한 쓰레드↓
             @Override
             public void onClick(View v) {
-                tvupdate.setText("새로고침 중입니다...(약20초 소요)");
+                tvupdate.setText("새로고침 중입니다...(약 3초 내외)");
                 sqlDB = myHelper.getWritableDatabase();
                 myHelper.onUpgrade(sqlDB,1,2);
                 Thread t = new Thread(new Runnable() {
@@ -119,7 +119,7 @@ public class MainActivity2 extends AppCompatActivity {
             }
             //인터넷 연결을 위한 쓰레드↑
         });
-        //새로고침 버튼 눌렀을 때↑
+        //새로고침 버튼 눌렀을 때↑*/
 
         //온도 꺼내오기 버튼 눌렀을 때 ↓
         /*btndeg.setOnClickListener(new View.OnClickListener() {
@@ -576,9 +576,32 @@ public class MainActivity2 extends AppCompatActivity {
             }
             cursor2.close();
             sqlDB.close();
-            tvupdate.setText("새로고침을 누르세요 ↑");
-            tvdeg.setText("");
-            tvcloth.setText("");
+            //자동 새로고침 ↓
+                tvupdate.setText("새로고침 중입니다...(약 3초 내외)");
+                sqlDB = myHelper.getWritableDatabase();
+                myHelper.onUpgrade(sqlDB,1,2);
+                Thread t = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        try {
+                            weather();
+                            Log.i("loadingtest","weather함수 끝");
+                            deg();
+                            Log.i("loadingtest","deg함수 끝");
+
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+
+                });
+
+
+                t.start();
+
+                //자동 새로고침 ↑
             }else if (locarray.length==3) {
 
                 Log.i("leveltest", "2번");
@@ -595,7 +618,32 @@ public class MainActivity2 extends AppCompatActivity {
                 }
                 cursor2.close();
                 sqlDB.close();
-                tvcom1.setText("새로고침을 누르세요");
+                //자동 새로고침 ↓
+                tvupdate.setText("새로고침 중입니다...(약 3초 내외)");
+                sqlDB = myHelper.getWritableDatabase();
+                myHelper.onUpgrade(sqlDB,1,2);
+                Thread t = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        try {
+                            weather();
+                            Log.i("loadingtest","weather함수 끝");
+                            deg();
+                            Log.i("loadingtest","deg함수 끝");
+
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+
+                });
+
+
+                t.start();
+
+                //자동 새로고침 ↑
             }else if (locarray.length==2) {
 
                 Log.i("leveltest", "3번");
@@ -612,7 +660,32 @@ public class MainActivity2 extends AppCompatActivity {
                 }
                 cursor2.close();
                 sqlDB.close();
-                tvcom1.setText("새로고침을 누르세요");
+                //자동 새로고침 ↓
+                tvupdate.setText("새로고침 중입니다...(약 3초 내외)");
+                sqlDB = myHelper.getWritableDatabase();
+                myHelper.onUpgrade(sqlDB,1,2);
+                Thread t = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        try {
+                            weather();
+                            Log.i("loadingtest","weather함수 끝");
+                            deg();
+                            Log.i("loadingtest","deg함수 끝");
+
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+
+                });
+
+
+                t.start();
+
+                //자동 새로고침 ↑
             }else{
                 Log.i("leveltest","삐빅 오류~~");
             }
