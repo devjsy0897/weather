@@ -218,7 +218,238 @@ public class MainActivity2 extends AppCompatActivity {
                 현재시간<0000 -> where fcstDate-1 and 2100=fcstTime
                  */
             Log.i("timetest1",time.format(date));
-                if(Integer.parseInt(time.format(date))<1800){
+            //시간 알고리즘 ↓
+                if(Integer.parseInt(time.format(date))<300){
+                    Log.i("timetest1","1");
+                    cursor = sqlDB.rawQuery("Select * from village where fcstDate=baseDate and fcstTime=0 and category='T3H';", null);
+                    String fvale = "";
+
+                    while (cursor.moveToNext()){
+                        fvale += cursor.getString(5);
+                        Log.i("fvaletest",fvale);
+                    }
+
+
+                    SimpleDateFormat time1 = new SimpleDateFormat("MM.dd. HH:mm");
+                    tvupdate.setText("최근 업데시트 시간 : "+(time1.format(date1)));
+                    String upcolor = "#000000";
+                    tvupdate.setTextColor(Color.parseColor(upcolor));
+                    if(Integer.parseInt(fvale)<0) {
+                        tvdeg.setText(fvale+"℃");
+                        tvcom1.setText("영하에요!");
+                        tvcloth.setText("두꺼운 외투가 필요해요");
+                    }else if(Integer.parseInt(fvale)<9){
+                        tvdeg.setText(fvale+"℃");
+                        tvcom1.setText("추워요!");
+                        tvcloth.setText("따뜻한 외투가 필요해요");
+                    }else if(Integer.parseInt(fvale)<15){
+                        tvdeg.setText(fvale+"℃");
+                        tvcom1.setText("쌀쌀해요!");
+                        tvcloth.setText("가벼운 외투가 필요해요");
+                    }else if(Integer.parseInt(fvale)<20){
+                        tvdeg.setText(fvale+"℃");
+                        tvcom1.setText("선선해요!");
+                    }else if(Integer.parseInt(fvale)<25){
+                        tvdeg.setText(fvale+"℃");
+                        tvcom1.setText("따뜻해요!");
+                    }else if(Integer.parseInt(fvale)<30){
+                        tvdeg.setText(fvale+"℃");
+                        tvcom1.setText("약간 더워요!");
+                    }else if(30<=Integer.parseInt(fvale)){
+                        tvdeg.setText(fvale+"℃");
+                        tvcom1.setText("더워요!");
+                    }
+                    else{
+                        tvcom1.setText("무언가 오류!");
+                    }
+
+                    cursor.close();
+                    sqlDB.close();
+                }else if(Integer.parseInt(time.format(date))<600){
+                    Log.i("timetest1","1");
+                    cursor = sqlDB.rawQuery("Select * from village where fcstDate=baseDate and fcstTime=300 and category='T3H';", null);
+                    String fvale = "";
+
+                    while (cursor.moveToNext()){
+                        fvale += cursor.getString(5);
+                        Log.i("fvaletest",fvale);
+                    }
+
+
+                    SimpleDateFormat time1 = new SimpleDateFormat("MM.dd. HH:mm");
+                    tvupdate.setText("최근 업데시트 시간 : "+(time1.format(date1)));
+                    String upcolor = "#000000";
+                    tvupdate.setTextColor(Color.parseColor(upcolor));
+                    if(Integer.parseInt(fvale)<0) {
+                        tvdeg.setText(fvale+"℃");
+                        tvcom1.setText("영하에요!");
+                        tvcloth.setText("두꺼운 외투가 필요해요");
+                    }else if(Integer.parseInt(fvale)<9){
+                        tvdeg.setText(fvale+"℃");
+                        tvcom1.setText("추워요!");
+                        tvcloth.setText("따뜻한 외투가 필요해요");
+                    }else if(Integer.parseInt(fvale)<15){
+                        tvdeg.setText(fvale+"℃");
+                        tvcom1.setText("쌀쌀해요!");
+                        tvcloth.setText("가벼운 외투가 필요해요");
+                    }else if(Integer.parseInt(fvale)<20){
+                        tvdeg.setText(fvale+"℃");
+                        tvcom1.setText("선선해요!");
+                    }else if(Integer.parseInt(fvale)<25){
+                        tvdeg.setText(fvale+"℃");
+                        tvcom1.setText("따뜻해요!");
+                    }else if(Integer.parseInt(fvale)<30){
+                        tvdeg.setText(fvale+"℃");
+                        tvcom1.setText("약간 더워요!");
+                    }else if(30<=Integer.parseInt(fvale)){
+                        tvdeg.setText(fvale+"℃");
+                        tvcom1.setText("더워요!");
+                    }
+                    else{
+                        tvcom1.setText("무언가 오류!");
+                    }
+
+                    cursor.close();
+                    sqlDB.close();
+                }else if(Integer.parseInt(time.format(date))<900){
+                    Log.i("timetest1","1");
+                    cursor = sqlDB.rawQuery("Select * from village where fcstDate=baseDate and fcstTime=600 and category='T3H';", null);
+                    String fvale = "";
+
+                    while (cursor.moveToNext()){
+                        fvale += cursor.getString(5);
+                        Log.i("fvaletest",fvale);
+                    }
+
+
+                    SimpleDateFormat time1 = new SimpleDateFormat("MM.dd. HH:mm");
+                    tvupdate.setText("최근 업데시트 시간 : "+(time1.format(date1)));
+                    String upcolor = "#000000";
+                    tvupdate.setTextColor(Color.parseColor(upcolor));
+                    if(Integer.parseInt(fvale)<0) {
+                        tvdeg.setText(fvale+"℃");
+                        tvcom1.setText("영하에요!");
+                        tvcloth.setText("두꺼운 외투가 필요해요");
+                    }else if(Integer.parseInt(fvale)<9){
+                        tvdeg.setText(fvale+"℃");
+                        tvcom1.setText("추워요!");
+                        tvcloth.setText("따뜻한 외투가 필요해요");
+                    }else if(Integer.parseInt(fvale)<15){
+                        tvdeg.setText(fvale+"℃");
+                        tvcom1.setText("쌀쌀해요!");
+                        tvcloth.setText("가벼운 외투가 필요해요");
+                    }else if(Integer.parseInt(fvale)<20){
+                        tvdeg.setText(fvale+"℃");
+                        tvcom1.setText("선선해요!");
+                    }else if(Integer.parseInt(fvale)<25){
+                        tvdeg.setText(fvale+"℃");
+                        tvcom1.setText("따뜻해요!");
+                    }else if(Integer.parseInt(fvale)<30){
+                        tvdeg.setText(fvale+"℃");
+                        tvcom1.setText("약간 더워요!");
+                    }else if(30<=Integer.parseInt(fvale)){
+                        tvdeg.setText(fvale+"℃");
+                        tvcom1.setText("더워요!");
+                    }
+                    else{
+                        tvcom1.setText("무언가 오류!");
+                    }
+
+                    cursor.close();
+                    sqlDB.close();
+                }else if(Integer.parseInt(time.format(date))<1200){
+                    Log.i("timetest1","1");
+                    cursor = sqlDB.rawQuery("Select * from village where fcstDate=baseDate and fcstTime=900 and category='T3H';", null);
+                    String fvale = "";
+
+                    while (cursor.moveToNext()){
+                        fvale += cursor.getString(5);
+                        Log.i("fvaletest",fvale);
+                    }
+
+
+                    SimpleDateFormat time1 = new SimpleDateFormat("MM.dd. HH:mm");
+                    tvupdate.setText("최근 업데시트 시간 : "+(time1.format(date1)));
+                    String upcolor = "#000000";
+                    tvupdate.setTextColor(Color.parseColor(upcolor));
+                    if(Integer.parseInt(fvale)<0) {
+                        tvdeg.setText(fvale+"℃");
+                        tvcom1.setText("영하에요!");
+                        tvcloth.setText("두꺼운 외투가 필요해요");
+                    }else if(Integer.parseInt(fvale)<9){
+                        tvdeg.setText(fvale+"℃");
+                        tvcom1.setText("추워요!");
+                        tvcloth.setText("따뜻한 외투가 필요해요");
+                    }else if(Integer.parseInt(fvale)<15){
+                        tvdeg.setText(fvale+"℃");
+                        tvcom1.setText("쌀쌀해요!");
+                        tvcloth.setText("가벼운 외투가 필요해요");
+                    }else if(Integer.parseInt(fvale)<20){
+                        tvdeg.setText(fvale+"℃");
+                        tvcom1.setText("선선해요!");
+                    }else if(Integer.parseInt(fvale)<25){
+                        tvdeg.setText(fvale+"℃");
+                        tvcom1.setText("따뜻해요!");
+                    }else if(Integer.parseInt(fvale)<30){
+                        tvdeg.setText(fvale+"℃");
+                        tvcom1.setText("약간 더워요!");
+                    }else if(30<=Integer.parseInt(fvale)){
+                        tvdeg.setText(fvale+"℃");
+                        tvcom1.setText("더워요!");
+                    }
+                    else{
+                        tvcom1.setText("무언가 오류!");
+                    }
+
+                    cursor.close();
+                    sqlDB.close();
+                }else if(Integer.parseInt(time.format(date))<1500){
+                    Log.i("timetest1","1");
+                    cursor = sqlDB.rawQuery("Select * from village where fcstDate=baseDate and fcstTime=1200 and category='T3H';", null);
+                    String fvale = "";
+
+                    while (cursor.moveToNext()){
+                        fvale += cursor.getString(5);
+                        Log.i("fvaletest",fvale);
+                    }
+
+
+                    SimpleDateFormat time1 = new SimpleDateFormat("MM.dd. HH:mm");
+                    tvupdate.setText("최근 업데시트 시간 : "+(time1.format(date1)));
+                    String upcolor = "#000000";
+                    tvupdate.setTextColor(Color.parseColor(upcolor));
+                    if(Integer.parseInt(fvale)<0) {
+                        tvdeg.setText(fvale+"℃");
+                        tvcom1.setText("영하에요!");
+                        tvcloth.setText("두꺼운 외투가 필요해요");
+                    }else if(Integer.parseInt(fvale)<9){
+                        tvdeg.setText(fvale+"℃");
+                        tvcom1.setText("추워요!");
+                        tvcloth.setText("따뜻한 외투가 필요해요");
+                    }else if(Integer.parseInt(fvale)<15){
+                        tvdeg.setText(fvale+"℃");
+                        tvcom1.setText("쌀쌀해요!");
+                        tvcloth.setText("가벼운 외투가 필요해요");
+                    }else if(Integer.parseInt(fvale)<20){
+                        tvdeg.setText(fvale+"℃");
+                        tvcom1.setText("선선해요!");
+                    }else if(Integer.parseInt(fvale)<25){
+                        tvdeg.setText(fvale+"℃");
+                        tvcom1.setText("따뜻해요!");
+                    }else if(Integer.parseInt(fvale)<30){
+                        tvdeg.setText(fvale+"℃");
+                        tvcom1.setText("약간 더워요!");
+                    }else if(30<=Integer.parseInt(fvale)){
+                        tvdeg.setText(fvale+"℃");
+                        tvcom1.setText("더워요!");
+                    }
+                    else{
+                        tvcom1.setText("무언가 오류!");
+                    }
+
+                    cursor.close();
+                    sqlDB.close();
+                }else if(Integer.parseInt(time.format(date))<1800){
                     Log.i("timetest1","1");
                     cursor = sqlDB.rawQuery("Select * from village where fcstDate=baseDate and fcstTime=1500 and category='T3H';", null);
                     String fvale = "";
@@ -357,6 +588,7 @@ public class MainActivity2 extends AppCompatActivity {
                     cursor.close();
                     sqlDB.close();
                 }
+                //시간 알고리즘 ↑
                 }
 
 
