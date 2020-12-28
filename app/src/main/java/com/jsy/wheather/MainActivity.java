@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -39,18 +40,17 @@ public class MainActivity2 extends AppCompatActivity {
     public static final int REQUEST_CODE = 100;
 
     ArrayList<String> list;
-    TextView tvdeg,tvcom1,tvcloth,tvupdate;
+    TextView tvdeg,tvcom1,tvcloth,tvupdate,tvcloud;
     Button /*btncome,*/btnvlist;
     SQLiteDatabase sqlDB,sqlDB2;
     myDBHelper myHelper,myHelper2;
     Date date,date1;
     String locnx;
     String locny;
-
+    int fsky=0;
     private TextView tvloc;
-
     AdView adView;
-
+    ImageView ivcloud;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +61,7 @@ public class MainActivity2 extends AppCompatActivity {
         tvcom1 = (TextView)findViewById(R.id.tvcom1);
         tvcloth = (TextView)findViewById(R.id.tvcloth);
         tvupdate = (TextView)findViewById(R.id.tvupdate);
+        tvcloud = (TextView)findViewById(R.id.tvcloud);
 
         //btncome = (Button)findViewById(R.id.btncome);
         btnvlist = (Button)findViewById(R.id.btnvlist);
@@ -72,6 +73,9 @@ public class MainActivity2 extends AppCompatActivity {
         date1 = new Date(System.currentTimeMillis());
 
         tvloc = (TextView)findViewById(R.id.tvloc);
+
+
+
         //지역선택 버튼 눌렀을 때 ↓
         btnvlist.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -366,6 +370,15 @@ public class MainActivity2 extends AppCompatActivity {
                         fvale += cursor.getString(5);
                         Log.i("fvaletest",fvale);
                     }
+//구름 정도 select 해서 화면에 뿌려줌 ↓
+                    cursor = sqlDB.rawQuery("Select * from village where fcstDate=baseDate and fcstTime=1500 and category='SKY';", null);
+
+                    while (cursor.moveToNext()){
+                        fsky += cursor.getInt(5);
+                        Log.i("fvaletest",fsky+"");
+
+                    }
+                    //구름 정도 select 해서 화면에 뿌려줌 ↑
 
 
                     SimpleDateFormat time1 = new SimpleDateFormat("MM.dd. HH:mm");
@@ -412,7 +425,15 @@ public class MainActivity2 extends AppCompatActivity {
                         fvale += cursor.getString(5);
                         Log.i("fvaletest",fvale);
                     }
+                    //구름 정도 select 해서 화면에 뿌려줌 ↓
+                    cursor = sqlDB.rawQuery("Select * from village where fcstDate=baseDate and fcstTime=1500 and category='SKY';", null);
 
+                    while (cursor.moveToNext()){
+                        fsky += cursor.getInt(5);
+                        Log.i("fvaletest",fsky+"");
+
+                    }
+                    //구름 정도 select 해서 화면에 뿌려줌 ↑
 
                     SimpleDateFormat time1 = new SimpleDateFormat("MM.dd. HH:mm");
                     tvupdate.setText("최근 업데시트 시간 : "+(time1.format(date1)));
@@ -460,6 +481,8 @@ public class MainActivity2 extends AppCompatActivity {
                     }
 
 
+
+
                 SimpleDateFormat time1 = new SimpleDateFormat("MM.dd. HH:mm");
                     tvupdate.setText("최근 업데시트 시간 : "+(time1.format(date1)));
                     String upcolor = "#000000";
@@ -504,6 +527,8 @@ public class MainActivity2 extends AppCompatActivity {
                         fvale += cursor.getString(5);
                         Log.i("fvaletest",fvale);
                     }
+
+
 
 
                     SimpleDateFormat time1 = new SimpleDateFormat("MM.dd. HH:mm");
@@ -598,7 +623,7 @@ public class MainActivity2 extends AppCompatActivity {
     public void weather() throws IOException {
         SimpleDateFormat fourteen_format = new SimpleDateFormat("yyyyMMdd");
         Log.i("timetest",Integer.parseInt(fourteen_format.format(date))+"");
-        for(int i=1;i<10;i++) {
+        for(int i=1;i<15;i++) {
             StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/1360000/VilageFcstInfoService/getVilageFcst"); /*URL*/
             //urlBuilder.append("&" + URLEncoder.encode("ServiceKey", "UTF-8") + "=" + URLEncoder.encode("-", "UTF-8")); /*공공데이터포털에서 받은 인증키*/
             urlBuilder.append("&" + URLEncoder.encode("pageNo", "UTF-8") + "=" + URLEncoder.encode(i+"", "UTF-8")); /*페이지번호*/
@@ -766,7 +791,7 @@ public class MainActivity2 extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
+ivcloud = (ImageView)findViewById(R.id.ivcloud);
         if (requestCode == REQUEST_CODE) {
             if (resultCode != Activity.RESULT_OK) {
                 return;
@@ -812,6 +837,7 @@ public class MainActivity2 extends AppCompatActivity {
                 tvupdate.setText("새로고침 중입니다...(약 3초 내외)");
                 sqlDB = myHelper.getWritableDatabase();
                 myHelper.onUpgrade(sqlDB,1,2);
+
                 Thread t = new Thread(new Runnable() {
                     @Override
                     public void run() {
@@ -821,15 +847,25 @@ public class MainActivity2 extends AppCompatActivity {
                             Log.i("loadingtest","weather함수 끝");
                             deg();
                             Log.i("loadingtest","deg함수 끝");
+                            switch (fsky){
+                                case 1: tvcloud.setText("맑음");
+                                    break;
+                                case 3: tvcloud.setText("구름 많음");
+                                    break;
+                                case 4: tvcloud.setText("흐림");
+                                    break;
+                            }
 
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
 
+
+
+
                     }
 
                 });
-
 
                 t.start();
 
@@ -921,6 +957,9 @@ public class MainActivity2 extends AppCompatActivity {
             }else{
                 Log.i("leveltest","삐빅 오류~~");
             }
+
+
+
         }
     }
     //intent로 지역 들고옴 ↑
