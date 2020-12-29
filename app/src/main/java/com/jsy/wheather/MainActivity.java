@@ -10,7 +10,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -41,7 +41,7 @@ public class MainActivity2 extends AppCompatActivity {
 
     ArrayList<String> list;
     TextView tvdeg,tvcom1,tvcloth,tvupdate,tvcloud;
-    Button /*btncome,*/btnvlist;
+    //Button /*btncome,*/btnvlist;
     SQLiteDatabase sqlDB,sqlDB2;
     myDBHelper myHelper,myHelper2;
     Date date,date1;
@@ -51,6 +51,7 @@ public class MainActivity2 extends AppCompatActivity {
     private TextView tvloc;
     AdView adView;
     ImageView ivcloud;
+    ImageButton btnvlist;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,7 +65,8 @@ public class MainActivity2 extends AppCompatActivity {
         tvcloud = (TextView)findViewById(R.id.tvcloud);
 
         //btncome = (Button)findViewById(R.id.btncome);
-        btnvlist = (Button)findViewById(R.id.btnvlist);
+        //btnvlist = (Button)findViewById(R.id.btnvlist);
+        btnvlist = (ImageButton) findViewById(R.id.btnvlist);
 
         list = new ArrayList<>();
         myHelper = new myDBHelper(this);
@@ -239,28 +241,28 @@ public class MainActivity2 extends AppCompatActivity {
                     String upcolor = "#000000";
                     tvupdate.setTextColor(Color.parseColor(upcolor));
                     if(Integer.parseInt(fvale)<0) {
-                        tvdeg.setText(fvale+"℃");
+                        tvdeg.setText(fvale+"º");
                         tvcom1.setText("영하에요!");
                         tvcloth.setText("두꺼운 외투가 필요해요");
                     }else if(Integer.parseInt(fvale)<9){
-                        tvdeg.setText(fvale+"℃");
+                        tvdeg.setText(fvale+"º");
                         tvcom1.setText("추워요!");
                         tvcloth.setText("따뜻한 외투가 필요해요");
                     }else if(Integer.parseInt(fvale)<15){
-                        tvdeg.setText(fvale+"℃");
+                        tvdeg.setText(fvale+"º");
                         tvcom1.setText("쌀쌀해요!");
                         tvcloth.setText("가벼운 외투가 필요해요");
                     }else if(Integer.parseInt(fvale)<20){
-                        tvdeg.setText(fvale+"℃");
+                        tvdeg.setText(fvale+"º");
                         tvcom1.setText("선선해요!");
                     }else if(Integer.parseInt(fvale)<25){
-                        tvdeg.setText(fvale+"℃");
+                        tvdeg.setText(fvale+"º");
                         tvcom1.setText("따뜻해요!");
                     }else if(Integer.parseInt(fvale)<30){
-                        tvdeg.setText(fvale+"℃");
+                        tvdeg.setText(fvale+"º");
                         tvcom1.setText("약간 더워요!");
                     }else if(30<=Integer.parseInt(fvale)){
-                        tvdeg.setText(fvale+"℃");
+                        tvdeg.setText(fvale+"º");
                         tvcom1.setText("더워요!");
                     }
                     else{
@@ -285,28 +287,28 @@ public class MainActivity2 extends AppCompatActivity {
                     String upcolor = "#000000";
                     tvupdate.setTextColor(Color.parseColor(upcolor));
                     if(Integer.parseInt(fvale)<0) {
-                        tvdeg.setText(fvale+"℃");
+                        tvdeg.setText(fvale+"º");
                         tvcom1.setText("영하에요!");
                         tvcloth.setText("두꺼운 외투가 필요해요");
                     }else if(Integer.parseInt(fvale)<9){
-                        tvdeg.setText(fvale+"℃");
+                        tvdeg.setText(fvale+"º");
                         tvcom1.setText("추워요!");
                         tvcloth.setText("따뜻한 외투가 필요해요");
                     }else if(Integer.parseInt(fvale)<15){
-                        tvdeg.setText(fvale+"℃");
+                        tvdeg.setText(fvale+"º");
                         tvcom1.setText("쌀쌀해요!");
                         tvcloth.setText("가벼운 외투가 필요해요");
                     }else if(Integer.parseInt(fvale)<20){
-                        tvdeg.setText(fvale+"℃");
+                        tvdeg.setText(fvale+"º");
                         tvcom1.setText("선선해요!");
                     }else if(Integer.parseInt(fvale)<25){
-                        tvdeg.setText(fvale+"℃");
+                        tvdeg.setText(fvale+"º");
                         tvcom1.setText("따뜻해요!");
                     }else if(Integer.parseInt(fvale)<30){
-                        tvdeg.setText(fvale+"℃");
+                        tvdeg.setText(fvale+"º");
                         tvcom1.setText("약간 더워요!");
                     }else if(30<=Integer.parseInt(fvale)){
-                        tvdeg.setText(fvale+"℃");
+                        tvdeg.setText(fvale+"º");
                         tvcom1.setText("더워요!");
                     }
                     else{
@@ -331,28 +333,28 @@ public class MainActivity2 extends AppCompatActivity {
                     String upcolor = "#000000";
                     tvupdate.setTextColor(Color.parseColor(upcolor));
                     if(Integer.parseInt(fvale)<0) {
-                        tvdeg.setText(fvale+"℃");
+                        tvdeg.setText(fvale+"º");
                         tvcom1.setText("영하에요!");
                         tvcloth.setText("두꺼운 외투가 필요해요");
                     }else if(Integer.parseInt(fvale)<9){
-                        tvdeg.setText(fvale+"℃");
+                        tvdeg.setText(fvale+"º");
                         tvcom1.setText("추워요!");
                         tvcloth.setText("따뜻한 외투가 필요해요");
                     }else if(Integer.parseInt(fvale)<15){
-                        tvdeg.setText(fvale+"℃");
+                        tvdeg.setText(fvale+"º");
                         tvcom1.setText("쌀쌀해요!");
                         tvcloth.setText("가벼운 외투가 필요해요");
                     }else if(Integer.parseInt(fvale)<20){
-                        tvdeg.setText(fvale+"℃");
+                        tvdeg.setText(fvale+"º");
                         tvcom1.setText("선선해요!");
                     }else if(Integer.parseInt(fvale)<25){
-                        tvdeg.setText(fvale+"℃");
+                        tvdeg.setText(fvale+"º");
                         tvcom1.setText("따뜻해요!");
                     }else if(Integer.parseInt(fvale)<30){
-                        tvdeg.setText(fvale+"℃");
+                        tvdeg.setText(fvale+"º");
                         tvcom1.setText("약간 더워요!");
                     }else if(30<=Integer.parseInt(fvale)){
-                        tvdeg.setText(fvale+"℃");
+                        tvdeg.setText(fvale+"º");
                         tvcom1.setText("더워요!");
                     }
                     else{
@@ -386,34 +388,33 @@ public class MainActivity2 extends AppCompatActivity {
                     String upcolor = "#000000";
                     tvupdate.setTextColor(Color.parseColor(upcolor));
                     if(Integer.parseInt(fvale)<0) {
-                        tvdeg.setText(fvale+"℃");
+                        tvdeg.setText(fvale+"º");
                         tvcom1.setText("영하에요!");
                         tvcloth.setText("두꺼운 외투가 필요해요");
                     }else if(Integer.parseInt(fvale)<9){
-                        tvdeg.setText(fvale+"℃");
+                        tvdeg.setText(fvale+"º");
                         tvcom1.setText("추워요!");
                         tvcloth.setText("따뜻한 외투가 필요해요");
                     }else if(Integer.parseInt(fvale)<15){
-                        tvdeg.setText(fvale+"℃");
+                        tvdeg.setText(fvale+"º");
                         tvcom1.setText("쌀쌀해요!");
                         tvcloth.setText("가벼운 외투가 필요해요");
                     }else if(Integer.parseInt(fvale)<20){
-                        tvdeg.setText(fvale+"℃");
+                        tvdeg.setText(fvale+"º");
                         tvcom1.setText("선선해요!");
                     }else if(Integer.parseInt(fvale)<25){
-                        tvdeg.setText(fvale+"℃");
+                        tvdeg.setText(fvale+"º");
                         tvcom1.setText("따뜻해요!");
                     }else if(Integer.parseInt(fvale)<30){
-                        tvdeg.setText(fvale+"℃");
+                        tvdeg.setText(fvale+"º");
                         tvcom1.setText("약간 더워요!");
                     }else if(30<=Integer.parseInt(fvale)){
-                        tvdeg.setText(fvale+"℃");
+                        tvdeg.setText(fvale+"º");
                         tvcom1.setText("더워요!");
                     }
                     else{
                         tvcom1.setText("무언가 오류!");
                     }
-
                     cursor.close();
                     sqlDB.close();
                 }else if(Integer.parseInt(time.format(date))<1500){
@@ -440,28 +441,28 @@ public class MainActivity2 extends AppCompatActivity {
                     String upcolor = "#000000";
                     tvupdate.setTextColor(Color.parseColor(upcolor));
                     if(Integer.parseInt(fvale)<0) {
-                        tvdeg.setText(fvale+"℃");
+                        tvdeg.setText(fvale+"º");
                         tvcom1.setText("영하에요!");
                         tvcloth.setText("두꺼운 외투가 필요해요");
                     }else if(Integer.parseInt(fvale)<9){
-                        tvdeg.setText(fvale+"℃");
+                        tvdeg.setText(fvale+"º");
                         tvcom1.setText("추워요!");
                         tvcloth.setText("따뜻한 외투가 필요해요");
                     }else if(Integer.parseInt(fvale)<15){
-                        tvdeg.setText(fvale+"℃");
+                        tvdeg.setText(fvale+"º");
                         tvcom1.setText("쌀쌀해요!");
                         tvcloth.setText("가벼운 외투가 필요해요");
                     }else if(Integer.parseInt(fvale)<20){
-                        tvdeg.setText(fvale+"℃");
+                        tvdeg.setText(fvale+"º");
                         tvcom1.setText("선선해요!");
                     }else if(Integer.parseInt(fvale)<25){
-                        tvdeg.setText(fvale+"℃");
+                        tvdeg.setText(fvale+"º");
                         tvcom1.setText("따뜻해요!");
                     }else if(Integer.parseInt(fvale)<30){
                         tvdeg.setText(fvale+"℃");
                         tvcom1.setText("약간 더워요!");
                     }else if(30<=Integer.parseInt(fvale)){
-                        tvdeg.setText(fvale+"℃");
+                        tvdeg.setText(fvale+"º");
                         tvcom1.setText("더워요!");
                     }
                     else{
@@ -622,15 +623,31 @@ public class MainActivity2 extends AppCompatActivity {
 
     public void weather() throws IOException {
         SimpleDateFormat fourteen_format = new SimpleDateFormat("yyyyMMdd");
+        int ftdate = Integer.parseInt(fourteen_format.format(date));
         Log.i("timetest",Integer.parseInt(fourteen_format.format(date))+"");
-        for(int i=1;i<15;i++) {
+        Log.i("timetest",ftdate+"ftdate");
+        SimpleDateFormat time = new SimpleDateFormat("HHmm");
+        Log.i("timetest3",time.format(date));
+        String btime=null;
+        //Base_time : 0200, 0500, 0800, 1100, 1400, 1700, 2000, 2300 (1일 8회)
+        if(0000<=Integer.parseInt(time.format(date))&&Integer.parseInt(time.format(date))<900){
+            btime = "1700";
+            ftdate -= 1;
+        }
+        if(900<=Integer.parseInt(time.format(date))&&Integer.parseInt(time.format(date))<2100){
+            btime = "0500";
+        }else if(2100<=Integer.parseInt(time.format(date))&&Integer.parseInt(time.format(date))<2400){
+            btime = "1700";
+        }
+
+        for(int i=1;i<20;i++) {
             StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/1360000/VilageFcstInfoService/getVilageFcst"); /*URL*/
             //urlBuilder.append("&" + URLEncoder.encode("ServiceKey", "UTF-8") + "=" + URLEncoder.encode("-", "UTF-8")); /*공공데이터포털에서 받은 인증키*/
             urlBuilder.append("&" + URLEncoder.encode("pageNo", "UTF-8") + "=" + URLEncoder.encode(i+"", "UTF-8")); /*페이지번호*/
             urlBuilder.append("&" + URLEncoder.encode("numOfRows", "UTF-8") + "=" + URLEncoder.encode("10", "UTF-8")); /*한 페이지 결과 수*/
             urlBuilder.append("&" + URLEncoder.encode("dataType", "UTF-8") + "=" + URLEncoder.encode("JSON", "UTF-8")); /*요청자료형식(XML/JSON)Default: XML*/
-            urlBuilder.append("&" + URLEncoder.encode("base_date", "UTF-8") + "=" + URLEncoder.encode(fourteen_format.format(date)+"", "UTF-8")); /*15년 12월 1일 발표*/
-            urlBuilder.append("&" + URLEncoder.encode("base_time", "UTF-8") + "=" + URLEncoder.encode("0200", "UTF-8")); /*06시 발표(정시단위)*/
+            urlBuilder.append("&" + URLEncoder.encode("base_date", "UTF-8") + "=" + URLEncoder.encode(ftdate+"", "UTF-8")); /*15년 12월 1일 발표*/
+            urlBuilder.append("&" + URLEncoder.encode("base_time", "UTF-8") + "=" + URLEncoder.encode(btime+"", "UTF-8")); /*06시 발표(정시단위)*/
             urlBuilder.append("&" + URLEncoder.encode("nx", "UTF-8") + "=" + URLEncoder.encode(locnx+"", "UTF-8")); /*예보지점의 X 좌표값*/
             urlBuilder.append("&" + URLEncoder.encode("ny", "UTF-8") + "=" + URLEncoder.encode(locny+"", "UTF-8")); /*예보지점 Y 좌표*/
 
@@ -900,6 +917,15 @@ ivcloud = (ImageView)findViewById(R.id.ivcloud);
                             deg();
                             Log.i("loadingtest","deg함수 끝");
 
+                            switch (fsky){
+                                case 1: tvcloud.setText("맑음");
+                                    break;
+                                case 3: tvcloud.setText("구름 많음");
+                                    break;
+                                case 4: tvcloud.setText("흐림");
+                                    break;
+                            }
+
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
@@ -941,6 +967,15 @@ ivcloud = (ImageView)findViewById(R.id.ivcloud);
                             Log.i("loadingtest","weather함수 끝");
                             deg();
                             Log.i("loadingtest","deg함수 끝");
+
+                            switch (fsky){
+                                case 1: tvcloud.setText("맑음");
+                                    break;
+                                case 3: tvcloud.setText("구름 많음");
+                                    break;
+                                case 4: tvcloud.setText("흐림");
+                                    break;
+                            }
 
                         } catch (IOException e) {
                             e.printStackTrace();
