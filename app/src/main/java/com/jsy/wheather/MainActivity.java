@@ -238,6 +238,25 @@ public class MainActivity2 extends AppCompatActivity {
                         Log.i("fvaletest",fvale);
                     }
 
+                    //구름 정도 select 해서 화면에 뿌려줌 ↓
+                    cursor = sqlDB.rawQuery("Select * from village where fcstDate=baseDate and fcstTime=1500 and category='SKY';", null);
+
+                    while (cursor.moveToNext()){
+                        fsky += cursor.getInt(5);
+                        Log.i("fvaletest",fsky+"");
+                        switch (fsky){
+                            case 1: tvcloud.setText("맑음");
+                                ivcloud.setImageResource(R.drawable.sunny2);
+                                break;
+                            case 3: tvcloud.setText("구름 많음");
+                                ivcloud.setImageResource(R.drawable.littlecloud);
+                                break;
+                            case 4: tvcloud.setText("흐림");
+                                ivcloud.setImageResource(R.drawable.cloud);
+                                break;
+                        }
+                    }
+                    //구름 정도 select 해서 화면에 뿌려줌 ↑
 
                     SimpleDateFormat time1 = new SimpleDateFormat("MM.dd. HH:mm");
                     tvupdate.setText("최근 업데시트 시간 : "+(time1.format(date1)));
@@ -284,6 +303,25 @@ public class MainActivity2 extends AppCompatActivity {
                         Log.i("fvaletest",fvale);
                     }
 
+                    //구름 정도 select 해서 화면에 뿌려줌 ↓
+                    cursor = sqlDB.rawQuery("Select * from village where fcstDate=baseDate and fcstTime=1500 and category='SKY';", null);
+
+                    while (cursor.moveToNext()){
+                        fsky += cursor.getInt(5);
+                        Log.i("fvaletest",fsky+"");
+                        switch (fsky){
+                            case 1: tvcloud.setText("맑음");
+                                ivcloud.setImageResource(R.drawable.sunny2);
+                                break;
+                            case 3: tvcloud.setText("구름 많음");
+                                ivcloud.setImageResource(R.drawable.littlecloud);
+                                break;
+                            case 4: tvcloud.setText("흐림");
+                                ivcloud.setImageResource(R.drawable.cloud);
+                                break;
+                        }
+                    }
+                    //구름 정도 select 해서 화면에 뿌려줌 ↑
 
                     SimpleDateFormat time1 = new SimpleDateFormat("MM.dd. HH:mm");
                     tvupdate.setText("최근 업데시트 시간 : "+(time1.format(date1)));
@@ -330,6 +368,25 @@ public class MainActivity2 extends AppCompatActivity {
                         Log.i("fvaletest",fvale);
                     }
 
+                    //구름 정도 select 해서 화면에 뿌려줌 ↓
+                    cursor = sqlDB.rawQuery("Select * from village where fcstDate=baseDate and fcstTime=1500 and category='SKY';", null);
+
+                    while (cursor.moveToNext()){
+                        fsky += cursor.getInt(5);
+                        Log.i("fvaletest",fsky+"");
+                        switch (fsky){
+                            case 1: tvcloud.setText("맑음");
+                                ivcloud.setImageResource(R.drawable.sunny2);
+                                break;
+                            case 3: tvcloud.setText("구름 많음");
+                                ivcloud.setImageResource(R.drawable.littlecloud);
+                                break;
+                            case 4: tvcloud.setText("흐림");
+                                ivcloud.setImageResource(R.drawable.cloud);
+                                break;
+                        }
+                    }
+                    //구름 정도 select 해서 화면에 뿌려줌 ↑
 
                     SimpleDateFormat time1 = new SimpleDateFormat("MM.dd. HH:mm");
                     tvupdate.setText("최근 업데시트 시간 : "+(time1.format(date1)));
@@ -375,7 +432,7 @@ public class MainActivity2 extends AppCompatActivity {
                         fvale += cursor.getString(5);
                         Log.i("fvaletest",fvale);
                     }
-//구름 정도 select 해서 화면에 뿌려줌 ↓
+                    //구름 정도 select 해서 화면에 뿌려줌 ↓
                     cursor = sqlDB.rawQuery("Select * from village where fcstDate=baseDate and fcstTime=1500 and category='SKY';", null);
 
                     while (cursor.moveToNext()){
@@ -444,8 +501,18 @@ public class MainActivity2 extends AppCompatActivity {
 
                     while (cursor.moveToNext()){
                         fsky += cursor.getInt(5);
-                        Log.i("fvaletest",fsky+"");
-
+                        Log.i("fvaletest fsky",fsky+"");
+                        switch (fsky){
+                            case 1: tvcloud.setText("맑음");
+                                ivcloud.setImageResource(R.drawable.sunny2);
+                                break;
+                            case 3: tvcloud.setText("구름 많음");
+                                ivcloud.setImageResource(R.drawable.littlecloud);
+                                break;
+                            case 4: tvcloud.setText("흐림");
+                                ivcloud.setImageResource(R.drawable.cloud);
+                                break;
+                        }
                     }
                     //구름 정도 select 해서 화면에 뿌려줌 ↑
 
@@ -492,8 +559,27 @@ public class MainActivity2 extends AppCompatActivity {
                     while (cursor.moveToNext()){
                         fvale += cursor.getString(5);
                         Log.i("fvaletest",fvale);
-                    }
 
+                    }
+                    //구름 정도 select 해서 화면에 뿌려줌 ↓
+                    cursor = sqlDB.rawQuery("Select * from village where fcstDate=baseDate and fcstTime=1500 and category='SKY';", null);
+
+                    while (cursor.moveToNext()){
+                        fsky += cursor.getInt(5);
+                        Log.i("fvaletest",fsky+"");
+                        switch (fsky){
+                            case 1: tvcloud.setText("맑음");
+                                ivcloud.setImageResource(R.drawable.sunny2);
+                                break;
+                            case 3: tvcloud.setText("구름 많음");
+                                ivcloud.setImageResource(R.drawable.littlecloud);
+                                break;
+                            case 4: tvcloud.setText("흐림");
+                                ivcloud.setImageResource(R.drawable.cloud);
+                                break;
+                        }
+                    }
+                    //구름 정도 select 해서 화면에 뿌려줌 ↑
 
 
 
@@ -540,10 +626,28 @@ public class MainActivity2 extends AppCompatActivity {
                     while (cursor.moveToNext()){
                         fvale += cursor.getString(5);
                         Log.i("fvaletest",fvale);
+
                     }
 
+                    //구름 정도 select 해서 화면에 뿌려줌 ↓
+                    cursor = sqlDB.rawQuery("Select * from village where fcstDate=baseDate and fcstTime=1500 and category='SKY';", null);
 
-
+                    while (cursor.moveToNext()){
+                        fsky += cursor.getInt(5);
+                        Log.i("fvaletest",fsky+"");
+                        switch (fsky){
+                            case 1: tvcloud.setText("맑음");
+                                ivcloud.setImageResource(R.drawable.sunny2);
+                                break;
+                            case 3: tvcloud.setText("구름 많음");
+                                ivcloud.setImageResource(R.drawable.littlecloud);
+                                break;
+                            case 4: tvcloud.setText("흐림");
+                                ivcloud.setImageResource(R.drawable.cloud);
+                                break;
+                        }
+                    }
+                    //구름 정도 select 해서 화면에 뿌려줌 ↑
 
                     SimpleDateFormat time1 = new SimpleDateFormat("MM.dd. HH:mm");
                     tvupdate.setText("최근 업데시트 시간 : "+(time1.format(date1)));
@@ -590,6 +694,25 @@ public class MainActivity2 extends AppCompatActivity {
                         Log.i("fvaletest",fvale);
                     }
 
+                    //구름 정도 select 해서 화면에 뿌려줌 ↓
+                    cursor = sqlDB.rawQuery("Select * from village where fcstDate=baseDate and fcstTime=1500 and category='SKY';", null);
+
+                    while (cursor.moveToNext()){
+                        fsky += cursor.getInt(5);
+                        Log.i("fvaletest",fsky+"");
+                        switch (fsky){
+                            case 1: tvcloud.setText("맑음");
+                                ivcloud.setImageResource(R.drawable.sunny2);
+                                break;
+                            case 3: tvcloud.setText("구름 많음");
+                                ivcloud.setImageResource(R.drawable.littlecloud);
+                                break;
+                            case 4: tvcloud.setText("흐림");
+                                ivcloud.setImageResource(R.drawable.cloud);
+                                break;
+                        }
+                    }
+                    //구름 정도 select 해서 화면에 뿌려줌 ↑
 
                     SimpleDateFormat time1 = new SimpleDateFormat("MM.dd. HH:mm");
                     tvupdate.setText("최근 업데시트 시간 : "+(time1.format(date1)));
@@ -788,6 +911,7 @@ public class MainActivity2 extends AppCompatActivity {
             public void run() {
         timewea1 = (TextView)findViewById(R.id.timewea1);
         ImageView timeimg1 = (ImageView)findViewById(R.id.timeimg1);
+        TextView hour1 = (TextView)findViewById(R.id.hour1);
         sqlDB = myHelper.getReadableDatabase();
         Cursor cursor;
         SimpleDateFormat time = new SimpleDateFormat("HHmm");
@@ -806,9 +930,11 @@ public class MainActivity2 extends AppCompatActivity {
             cursor = sqlDB.rawQuery("Select * from village where fcstDate=baseDate and fcstTime=1200 and category='SKY';", null);
             while (cursor.moveToNext()){
                 fvale1 += cursor.getString(5);
-                Log.i("fvaletest",fvale1);
+
+                Log.i("fvaletest fvalue",fvale1);
             }
-            timewea1.setText("12시:" + fvale);
+            hour1.setText("12시");
+            timewea1.setText(fvale+"º");
             switch (Integer.parseInt(fvale1)) {
                 case 1:
                 timeimg1.setImageResource(R.drawable.sunny2);break;
@@ -817,6 +943,8 @@ public class MainActivity2 extends AppCompatActivity {
                 case 4:
                     timeimg1.setImageResource(R.drawable.cloud);break;
             }
+        }else if(Integer.parseInt(time.format(date))<1500){
+            
         }
 
         }
