@@ -40,7 +40,7 @@ public class MainActivity2 extends AppCompatActivity {
     public static final int REQUEST_CODE = 100;
 
     ArrayList<String> list;
-    TextView tvdeg,tvcom1,tvcloth,tvupdate,tvcloud,timewea1;
+    TextView tvdeg,tvcom1,tvcloth,tvupdate,tvcloud;
     //Button /*btncome,*/btnvlist;
     SQLiteDatabase sqlDB,sqlDB2;
     myDBHelper myHelper,myHelper2;
@@ -76,8 +76,6 @@ public class MainActivity2 extends AppCompatActivity {
         date1 = new Date(System.currentTimeMillis());
 
         tvloc = (TextView)findViewById(R.id.tvloc);
-
-
 
         //지역선택 버튼 눌렀을 때 ↓
         btnvlist.setOnClickListener(new View.OnClickListener() {
@@ -909,9 +907,12 @@ public class MainActivity2 extends AppCompatActivity {
     public void timeweather(){
         runOnUiThread(new Runnable() {
             public void run() {
-        timewea1 = (TextView)findViewById(R.id.timewea1);
+        TextView timewea1 = (TextView)findViewById(R.id.timewea1);
+        TextView timewea2 = (TextView)findViewById(R.id.timewea2);
         ImageView timeimg1 = (ImageView)findViewById(R.id.timeimg1);
+        ImageView timeimg2 = (ImageView)findViewById(R.id.timeimg2);
         TextView hour1 = (TextView)findViewById(R.id.hour1);
+        TextView hour2 = (TextView)findViewById(R.id.hour2);
         sqlDB = myHelper.getReadableDatabase();
         Cursor cursor;
         SimpleDateFormat time = new SimpleDateFormat("HHmm");
@@ -919,18 +920,19 @@ public class MainActivity2 extends AppCompatActivity {
         Log.i("timetimetest",Integer.parseInt(time.format(date))+"");
         Log.i("timetimetest",Integer.parseInt(time1.format(date))+"");
 
-        if(Integer.parseInt(time.format(date))<1200){
-            cursor = sqlDB.rawQuery("Select * from village where fcstDate=baseDate and fcstTime=1200 and category='T3H';", null);
+        if(Integer.parseInt(time.format(date))<1700){
             String fvale = "";
             String fvale1 = "";
+
+            // 시작1 ↓
+            cursor = sqlDB.rawQuery("Select * from village where fcstDate=baseDate and fcstTime=1200 and category='T3H';", null);
             while (cursor.moveToNext()){
                 fvale += cursor.getString(5);
                 Log.i("fvaletest",fvale);
             }
             cursor = sqlDB.rawQuery("Select * from village where fcstDate=baseDate and fcstTime=1200 and category='SKY';", null);
             while (cursor.moveToNext()){
-                fvale1 += cursor.getString(5);
-
+                fvale1 = cursor.getString(5);
                 Log.i("fvaletest fvalue",fvale1);
             }
             hour1.setText("12시");
@@ -943,8 +945,29 @@ public class MainActivity2 extends AppCompatActivity {
                 case 4:
                     timeimg1.setImageResource(R.drawable.cloud);break;
             }
-        }else if(Integer.parseInt(time.format(date))<1500){
-            
+            // 시작1 ↑
+            // 시작2 ↓
+            cursor = sqlDB.rawQuery("Select * from village where fcstDate=baseDate and fcstTime=1500 and category='T3H';", null);
+            while (cursor.moveToNext()){
+                fvale = cursor.getString(5);
+                Log.i("fvaletest 15 deg",fvale);
+            }
+            cursor = sqlDB.rawQuery("Select * from village where fcstDate=baseDate and fcstTime=1500 and category='SKY';", null);
+            while (cursor.moveToNext()){
+                fvale1 = cursor.getString(5);
+                Log.i("fvaletest fvalue",fvale1);
+            }
+            hour2.setText("15시");
+            timewea2.setText(fvale+"º");
+            switch (Integer.parseInt(fvale1)) {
+                case 1:
+                    timeimg2.setImageResource(R.drawable.sunny2);break;
+                case 3:
+                    timeimg2.setImageResource(R.drawable.littlecloud);break;
+                case 4:
+                    timeimg2.setImageResource(R.drawable.cloud);break;
+            }
+            // 시작2 ↑
         }
 
         }
