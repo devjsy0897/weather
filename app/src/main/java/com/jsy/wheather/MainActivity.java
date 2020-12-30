@@ -40,7 +40,7 @@ public class MainActivity2 extends AppCompatActivity {
     public static final int REQUEST_CODE = 100;
 
     ArrayList<String> list;
-    TextView tvdeg,tvcom1,tvcloth,tvupdate,tvcloud;
+    TextView tvdeg,tvcom1,tvcloth,tvupdate,tvcloud,timewea1;
     //Button /*btncome,*/btnvlist;
     SQLiteDatabase sqlDB,sqlDB2;
     myDBHelper myHelper,myHelper2;
@@ -63,6 +63,7 @@ public class MainActivity2 extends AppCompatActivity {
         tvcloth = (TextView)findViewById(R.id.tvcloth);
         tvupdate = (TextView)findViewById(R.id.tvupdate);
         tvcloud = (TextView)findViewById(R.id.tvcloud);
+
 
         //btncome = (Button)findViewById(R.id.btncome);
         //btnvlist = (Button)findViewById(R.id.btnvlist);
@@ -207,6 +208,8 @@ public class MainActivity2 extends AppCompatActivity {
 
     //온도 꺼내오기 함수 ↓
             public void deg() {
+                runOnUiThread(new Runnable() {
+                                  public void run() {
                 sqlDB = myHelper.getReadableDatabase();
                 Cursor cursor;
                 SimpleDateFormat time = new SimpleDateFormat("HHmm");
@@ -378,7 +381,17 @@ public class MainActivity2 extends AppCompatActivity {
                     while (cursor.moveToNext()){
                         fsky += cursor.getInt(5);
                         Log.i("fvaletest",fsky+"");
-
+                        switch (fsky){
+                            case 1: tvcloud.setText("맑음");
+                                ivcloud.setImageResource(R.drawable.sunny2);
+                                break;
+                            case 3: tvcloud.setText("구름 많음");
+                                ivcloud.setImageResource(R.drawable.littlecloud);
+                                break;
+                            case 4: tvcloud.setText("흐림");
+                                ivcloud.setImageResource(R.drawable.cloud);
+                                break;
+                        }
                     }
                     //구름 정도 select 해서 화면에 뿌려줌 ↑
 
@@ -615,6 +628,8 @@ public class MainActivity2 extends AppCompatActivity {
                     sqlDB.close();
                 }
                 //시간 알고리즘 ↑
+                                  }
+                });
                 }
 
 
@@ -768,6 +783,46 @@ public class MainActivity2 extends AppCompatActivity {
 
     }
 
+    public void timeweather(){
+        runOnUiThread(new Runnable() {
+            public void run() {
+        timewea1 = (TextView)findViewById(R.id.timewea1);
+        ImageView timeimg1 = (ImageView)findViewById(R.id.timeimg1);
+        sqlDB = myHelper.getReadableDatabase();
+        Cursor cursor;
+        SimpleDateFormat time = new SimpleDateFormat("HHmm");
+        SimpleDateFormat time1 = new SimpleDateFormat("YYYYMMdd");
+        Log.i("timetimetest",Integer.parseInt(time.format(date))+"");
+        Log.i("timetimetest",Integer.parseInt(time1.format(date))+"");
+
+        if(Integer.parseInt(time.format(date))<1200){
+            cursor = sqlDB.rawQuery("Select * from village where fcstDate=baseDate and fcstTime=1200 and category='T3H';", null);
+            String fvale = "";
+            String fvale1 = "";
+            while (cursor.moveToNext()){
+                fvale += cursor.getString(5);
+                Log.i("fvaletest",fvale);
+            }
+            cursor = sqlDB.rawQuery("Select * from village where fcstDate=baseDate and fcstTime=1200 and category='SKY';", null);
+            while (cursor.moveToNext()){
+                fvale1 += cursor.getString(5);
+                Log.i("fvaletest",fvale1);
+            }
+            timewea1.setText("12시:" + fvale);
+            switch (Integer.parseInt(fvale1)) {
+                case 1:
+                timeimg1.setImageResource(R.drawable.sunny2);break;
+                case 3:
+                    timeimg1.setImageResource(R.drawable.littlecloud);break;
+                case 4:
+                    timeimg1.setImageResource(R.drawable.cloud);break;
+            }
+        }
+
+        }
+        });
+    }
+
 
     //DB 생성 클래스↓ (쓰레드 직전에 호출함)
     public class myDBHelper extends SQLiteOpenHelper {
@@ -864,14 +919,15 @@ ivcloud = (ImageView)findViewById(R.id.ivcloud);
                             Log.i("loadingtest","weather함수 끝");
                             deg();
                             Log.i("loadingtest","deg함수 끝");
-                            switch (fsky){
+                            /*switch (fsky){
                                 case 1: tvcloud.setText("맑음");
                                     break;
                                 case 3: tvcloud.setText("구름 많음");
                                     break;
                                 case 4: tvcloud.setText("흐림");
                                     break;
-                            }
+                            }*/
+                            timeweather();
 
                         } catch (IOException e) {
                             e.printStackTrace();
