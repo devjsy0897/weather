@@ -160,7 +160,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="200dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginBottom="10dp"
@@ -178,80 +178,599 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
+
             <LinearLayout
                 android:layout_width="50dp"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
-            <TextView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:gravity="center"
-                android:textColor="#000000"
-                android:text="시간"/>
-            <TextView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:gravity="center"
-                android:textColor="#000000"
-                android:text="날씨"/>
-            <TextView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:gravity="center"
-                android:textColor="#000000"
-                android:text="온도"/>
+                <TextView
+                    android:layout_width="50dp"
+                    android:layout_height="25dp"
+                    android:gravity="center|bottom"/>
+                <TextView
+                    android:layout_width="50dp"
+                    android:layout_height="25dp"
+                    android:gravity="center|top"
+                    android:text="시간"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:gravity="center"
+                    android:text="날씨"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:gravity="center"
+                    android:text="온도"
+                    android:textColor="#000000" />
             </LinearLayout>
-        <HorizontalScrollView
+
+            <HorizontalScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <LinearLayout
+                    android:id="@+id/layout1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/onel1"
+                        android:layout_width="match_parent"
+                        android:layout_height="25dp"
+                        android:gravity="center|bottom"/>
+                    <TextView
+                        android:id="@+id/hour1"
+                        android:layout_width="match_parent"
+                        android:layout_height="25dp"
+                        android:gravity="center" />
+                    <ImageView
+                        android:id="@+id/timeimg1"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:scaleType="fitXY"
+                        android:gravity="center"/>
+                    <TextView
+                        android:id="@+id/timewea1"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:gravity="center"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layout2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/onel2"
+                        android:layout_width="match_parent"
+                        android:layout_height="25dp"
+                        android:gravity="center"/>
+                    <TextView
+                        android:id="@+id/hour2"
+                        android:layout_width="match_parent"
+                        android:layout_height="25dp"
+                        android:gravity="center" />
+                    <ImageView
+                        android:id="@+id/timeimg2"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:scaleType="fitXY"
+                        android:gravity="center"/>
+                    <TextView
+                        android:id="@+id/timewea2"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:gravity="center"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                android:id="@+id/layout3"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-            <LinearLayout
-                android:layout_width="50dp"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
                 android:orientation="vertical">
                 <TextView
-                    android:id="@+id/hour1"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:gravity="center"/>
-                <ImageView
-                    android:id="@+id/timeimg1"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:scaleType="fitXY"
+                    android:id="@+id/onel3"
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
                     android:gravity="center"/>
                 <TextView
-                    android:id="@+id/timewea1"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:gravity="center"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-                <TextView
-                    android:id="@+id/hour2"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:id="@+id/hour3"
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
                     android:gravity="center" />
                 <ImageView
-                    android:id="@+id/timeimg2"
-                    android:layout_width="50dp"
+                    android:id="@+id/timeimg3"
+                    android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:scaleType="fitXY"
                     android:gravity="center"/>
                 <TextView
-                    android:id="@+id/timewea2"
-                    android:layout_width="50dp"
+                    android:id="@+id/timewea3"
+                    android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:gravity="center"/>
 
             </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/onel4"
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:gravity="center"/>
+                <TextView
+                    android:id="@+id/hour4"
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:gravity="center" />
+                <ImageView
+                    android:id="@+id/timeimg4"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:scaleType="fitXY"
+                    android:gravity="center"/>
+                <TextView
+                    android:id="@+id/timewea4"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:gravity="center"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/layout5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/onel5"
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:gravity="center"/>
+                <TextView
+                    android:id="@+id/hour5"
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:gravity="center" />
+                <ImageView
+                    android:id="@+id/timeimg5"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:scaleType="fitXY"
+                    android:gravity="center"/>
+                <TextView
+                    android:id="@+id/timewea5"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:gravity="center"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/layout6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/onel6"
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:gravity="center"/>
+                <TextView
+                    android:id="@+id/hour6"
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:gravity="center" />
+                <ImageView
+                    android:id="@+id/timeimg6"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:scaleType="fitXY"
+                    android:gravity="center"/>
+                <TextView
+                    android:id="@+id/timewea6"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:gravity="center"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/layout7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/onel7"
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:gravity="center"/>
+                <TextView
+                    android:id="@+id/hour7"
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:gravity="center" />
+                <ImageView
+                    android:id="@+id/timeimg7"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:scaleType="fitXY"
+                    android:gravity="center"/>
+                <TextView
+                    android:id="@+id/timewea7"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:gravity="center"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/layout8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/onel8"
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:gravity="center"/>
+                <TextView
+                    android:id="@+id/hour8"
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:gravity="center" />
+                <ImageView
+                    android:id="@+id/timeimg8"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:scaleType="fitXY"
+                    android:gravity="center"/>
+                <TextView
+                    android:id="@+id/timewea8"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:gravity="center"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/layout9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/onel9"
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:gravity="center"/>
+                <TextView
+                    android:id="@+id/hour9"
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:gravity="center" />
+                <ImageView
+                    android:id="@+id/timeimg9"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:scaleType="fitXY"
+                    android:gravity="center"/>
+                <TextView
+                    android:id="@+id/timewea9"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:gravity="center"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/layout10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/onel10"
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:gravity="center"/>
+                <TextView
+                    android:id="@+id/hour10"
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:gravity="center" />
+                <ImageView
+                    android:id="@+id/timeimg10"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:scaleType="fitXY"
+                    android:gravity="center"/>
+                <TextView
+                    android:id="@+id/timewea10"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:gravity="center"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/layout11"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/onel11"
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:gravity="center"/>
+                <TextView
+                    android:id="@+id/hour11"
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:gravity="center" />
+                <ImageView
+                    android:id="@+id/timeimg11"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:scaleType="fitXY"
+                    android:gravity="center"/>
+                <TextView
+                    android:id="@+id/timewea11"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:gravity="center"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/layout12"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/onel12"
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:gravity="center"/>
+                <TextView
+                    android:id="@+id/hour12"
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:gravity="center" />
+                <ImageView
+                    android:id="@+id/timeimg12"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:scaleType="fitXY"
+                    android:gravity="center"/>
+                <TextView
+                    android:id="@+id/timewea12"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:gravity="center"/>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/layout13"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/onel13"
+                        android:layout_width="match_parent"
+                        android:layout_height="25dp"
+                        android:gravity="center"/>
+                    <TextView
+                        android:id="@+id/hour13"
+                        android:layout_width="match_parent"
+                        android:layout_height="25dp"
+                        android:gravity="center" />
+                    <ImageView
+                        android:id="@+id/timeimg13"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:scaleType="fitXY"
+                        android:gravity="center"/>
+                    <TextView
+                        android:id="@+id/timewea13"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:gravity="center"/>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/layout14"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/onel14"
+                        android:layout_width="match_parent"
+                        android:layout_height="25dp"
+                        android:gravity="center"/>
+                    <TextView
+                        android:id="@+id/hour14"
+                        android:layout_width="match_parent"
+                        android:layout_height="25dp"
+                        android:gravity="center" />
+                    <ImageView
+                        android:id="@+id/timeimg14"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:scaleType="fitXY"
+                        android:gravity="center"/>
+                    <TextView
+                        android:id="@+id/timewea14"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:gravity="center"/>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/layout15"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/onel15"
+                        android:layout_width="match_parent"
+                        android:layout_height="25dp"
+                        android:gravity="center"/>
+                    <TextView
+                        android:id="@+id/hour15"
+                        android:layout_width="match_parent"
+                        android:layout_height="25dp"
+                        android:gravity="center" />
+                    <ImageView
+                        android:id="@+id/timeimg15"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:scaleType="fitXY"
+                        android:gravity="center"/>
+                    <TextView
+                        android:id="@+id/timewea15"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:gravity="center"/>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/layout16"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/onel16"
+                        android:layout_width="match_parent"
+                        android:layout_height="25dp"
+                        android:gravity="center"/>
+                    <TextView
+                        android:id="@+id/hour16"
+                        android:layout_width="match_parent"
+                        android:layout_height="25dp"
+                        android:gravity="center" />
+                    <ImageView
+                        android:id="@+id/timeimg16"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:scaleType="fitXY"
+                        android:gravity="center"/>
+                    <TextView
+                        android:id="@+id/timewea16"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:gravity="center"/>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/layout17"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/onel17"
+                        android:layout_width="match_parent"
+                        android:layout_height="25dp"
+                        android:gravity="center"/>
+                    <TextView
+                        android:id="@+id/hour17"
+                        android:layout_width="match_parent"
+                        android:layout_height="25dp"
+                        android:gravity="center" />
+                    <ImageView
+                        android:id="@+id/timeimg17"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:scaleType="fitXY"
+                        android:gravity="center"/>
+                    <TextView
+                        android:id="@+id/timewea17"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:gravity="center"/>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/layout18"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/onel18"
+                        android:layout_width="match_parent"
+                        android:layout_height="25dp"
+                        android:gravity="center"/>
+                    <TextView
+                        android:id="@+id/hour18"
+                        android:layout_width="match_parent"
+                        android:layout_height="25dp"
+                        android:gravity="center" />
+                    <ImageView
+                        android:id="@+id/timeimg18"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:scaleType="fitXY"
+                        android:gravity="center"/>
+                    <TextView
+                        android:id="@+id/timewea18"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:gravity="center"/>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/layout19"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/onel19"
+                        android:layout_width="match_parent"
+                        android:layout_height="25dp"
+                        android:gravity="center"/>
+                    <TextView
+                        android:id="@+id/hour19"
+                        android:layout_width="match_parent"
+                        android:layout_height="25dp"
+                        android:gravity="center" />
+                    <ImageView
+                        android:id="@+id/timeimg19"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:scaleType="fitXY"
+                        android:gravity="center"/>
+                    <TextView
+                        android:id="@+id/timewea19"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:gravity="center"/>
+
+                </LinearLayout>
+
             </LinearLayout>
         </HorizontalScrollView>
 
