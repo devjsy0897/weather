@@ -1067,10 +1067,10 @@ public class MainActivity2 extends AppCompatActivity {
                 params18 .width = 200;
                 params19 .width = 200;
 
-                layout2.setLayoutParams(params2);
-                layout3.setLayoutParams(params3);
-                layout4.setLayoutParams(params4);
-                layout5.setLayoutParams(params5);
+
+
+
+
                 layout6.setLayoutParams(params6);
                 layout7.setLayoutParams(params7);
                 layout8.setLayoutParams(params8);
@@ -1107,8 +1107,9 @@ public class MainActivity2 extends AppCompatActivity {
                 Log.i("valtest",t3hval);
                 Log.i("datetimetest",Integer.parseInt(time.format(date))+"");
                 Log.i("datetimetest",Integer.parseInt(ftime)+"");
-                if((900<Integer.parseInt(time.format(date))&&Integer.parseInt(time.format(date))<1159)||(2100<Integer.parseInt(time.format(date))&&Integer.parseInt(time.format(date))<2359)) {
+                if((600<Integer.parseInt(time.format(date))&&Integer.parseInt(time.format(date))<859)||(1800<Integer.parseInt(time.format(date))&&Integer.parseInt(time.format(date))<2059)) {
                     layout1.setLayoutParams(params1);
+
                     ftime = ftime.replace("00", "");
 
                     if (onel == 0 && Integer.parseInt(ftime) < 22) {
@@ -1123,81 +1124,91 @@ public class MainActivity2 extends AppCompatActivity {
                         }
                     }
                     Log.i("oneltest", onel + "");
-                    hour1.setText(ftime + "시");
+                    hour1.setText(ftime + "시1");
                     timewea1.setText(t3hval + "º");
                 }
             cursor.moveToNext();
                 ftime = cursor.getString(4);
                 t3hval = cursor.getString(5);
-                ftime = ftime.replace("00", "");
-                if(onel==0&&Integer.parseInt(ftime)<22){
-                    onel2.setText("오늘");
-                    onel++;
-                }else if(ftime=="0") {
-                    if (onel==1) {
-                        onel2.setText("내일");
+                if((900<Integer.parseInt(time.format(date))&&Integer.parseInt(time.format(date))<1159)||(21<Integer.parseInt(time.format(date))&&Integer.parseInt(time.format(date))<1159)) {
+                    layout2.setLayoutParams(params2);
+                    ftime = ftime.replace("00", "");
+
+                    if (onel == 0 && Integer.parseInt(ftime) < 22) {
+                        onel2.setText("오늘");
                         onel++;
+                    } else if (ftime == "0") {
+                        if (onel == 1) {
+                            onel2.setText("내일");
+                            onel++;
+                        } else if (onel == 2) {
+                            onel2.setText("모레");
+                        }
                     }
-                    else if(onel==2){
-                        onel2.setText("모레");
-                    }
+                    hour2.setText(ftime + "시2");
+                    timewea2.setText(t3hval + "º");
                 }
-                hour2.setText(ftime + "시");
-                timewea2.setText(t3hval + "º");
             cursor.moveToNext();
                 ftime = cursor.getString(4);
                 t3hval = cursor.getString(5);
-                ftime = ftime.replace("00", "");
-                if(onel==0&&Integer.parseInt(ftime)<22){
-                    onel3.setText("오늘");
-                    onel++;
-                }else if(ftime=="0") {
-                    if (onel==1) {
-                        onel3.setText("내일");
+
+                if((0<Integer.parseInt(time.format(date))&&Integer.parseInt(time.format(date))<259)||(1200<Integer.parseInt(time.format(date))&&Integer.parseInt(time.format(date))<1459)) {
+                    layout3.setLayoutParams(params3);
+                    ftime = ftime.replace("00", "");
+                    if (onel == 0 && Integer.parseInt(ftime) < 22) {
+                        onel3.setText("오늘");
                         onel++;
+                    } else if (ftime == "0") {
+                        if (onel == 1) {
+                            onel3.setText("내일");
+                            onel++;
+                        } else if (onel == 2) {
+                            onel3.setText("모레");
+                        }
                     }
-                    else if(onel==2){
-                        onel3.setText("모레");
-                    }
+                    hour3.setText(ftime + "시3");
+                    timewea3.setText(t3hval + "º");
                 }
-                hour3.setText(ftime + "시");
-                timewea3.setText(t3hval + "º");
             cursor.moveToNext();
                 ftime = cursor.getString(4);
                 t3hval = cursor.getString(5);
-                ftime = ftime.replace("00", "");
-                if(onel==0&&Integer.parseInt(ftime)<22){
-                    onel4.setText("오늘");
-                    onel++;
-                }else if(ftime=="0") {
-                    if (onel==1) {
-                        onel4.setText("내일");
+                if((3<Integer.parseInt(time.format(date))&&Integer.parseInt(time.format(date))<559)||(1500<Integer.parseInt(time.format(date))&&Integer.parseInt(time.format(date))<1759)) {
+                    ftime = ftime.replace("00", "");
+                    layout4.setLayoutParams(params4);
+                    if (onel == 0 && Integer.parseInt(ftime) < 22) {
+                        onel4.setText("오늘");
                         onel++;
+                    } else if (ftime == "0") {
+                        if (onel == 1) {
+                            onel4.setText("내일");
+                            onel++;
+                        } else if (onel == 2) {
+                            onel4.setText("모레");
+                        }
                     }
-                    else if(onel==2){
-                        onel4.setText("모레");
-                    }
+                    hour4.setText(ftime + "시4");
+                    timewea4.setText(t3hval + "º");
                 }
-                hour4.setText(ftime + "시");
-                timewea4.setText(t3hval + "º");
             cursor.moveToNext();
                 ftime = cursor.getString(4);
                 t3hval = cursor.getString(5);
-                ftime = ftime.replace("00", "");
-                if(onel==0&&Integer.parseInt(ftime)<22){
-                    onel5.setText("오늘");
-                    onel++;
-                }else if(ftime=="0") {
-                    if (onel==1) {
-                        onel5.setText("내일");
+                if((6<Integer.parseInt(time.format(date))&&Integer.parseInt(time.format(date))<859)||(1800<Integer.parseInt(time.format(date))&&Integer.parseInt(time.format(date))<2059)) {
+                    ftime = ftime.replace("00", "");
+                    layout5.setLayoutParams(params5);
+                    if (onel == 0 && Integer.parseInt(ftime) < 22) {
+                        onel5.setText("오늘");
                         onel++;
+                    } else if (ftime == "0") {
+                        if (onel == 1) {
+                            onel5.setText("내일");
+                            onel++;
+                        } else if (onel == 2) {
+                            onel5.setText("모레");
+                        }
                     }
-                    else if(onel==2){
-                        onel5.setText("모레");
-                    }
+                    hour5.setText(ftime + "시5");
+                    timewea5.setText(t3hval + "º");
                 }
-                hour5.setText(ftime + "시");
-                timewea5.setText(t3hval + "º");
             cursor.moveToNext();
                 ftime = cursor.getString(4);
                 t3hval = cursor.getString(5);
@@ -1215,7 +1226,7 @@ public class MainActivity2 extends AppCompatActivity {
                         onel6.setText("모레");
                     }
                 }
-                hour6.setText(ftime + "시");
+                hour6.setText(ftime + "시6");
                 timewea6.setText(t3hval + "º");
             cursor.moveToNext();
                 ftime = cursor.getString(4);
@@ -1234,7 +1245,7 @@ public class MainActivity2 extends AppCompatActivity {
                         onel7.setText("모레");
                     }
                 }
-                hour7.setText(ftime + "시");
+                hour7.setText(ftime + "시7");
                 timewea7.setText(t3hval + "º");
             cursor.moveToNext();
                 ftime = cursor.getString(4);
@@ -1253,7 +1264,7 @@ public class MainActivity2 extends AppCompatActivity {
                         onel8.setText("모레");
                     }
                 }
-                hour8.setText(ftime + "시");
+                hour8.setText(ftime + "시8");
                 timewea8.setText(t3hval + "º");
             cursor.moveToNext();
                 ftime = cursor.getString(4);
@@ -1272,7 +1283,7 @@ public class MainActivity2 extends AppCompatActivity {
                         onel9.setText("모레");
                     }
                 }
-                hour9.setText(ftime + "시");
+                hour9.setText(ftime + "시9");
                 timewea9.setText(t3hval + "º");
             cursor.moveToNext();
                 ftime = cursor.getString(4);
@@ -1485,6 +1496,7 @@ public class MainActivity2 extends AppCompatActivity {
                 }
             }else{}
             cursor.moveToNext();
+                if(hour2.getText().toString().contains("시")) {
                 skyval = cursor.getString(5);
                 switch (Integer.parseInt(skyval)) {
                     case 1:
@@ -1494,7 +1506,9 @@ public class MainActivity2 extends AppCompatActivity {
                     case 4:
                         timeimg2.setImageResource(R.drawable.cloud);break;
                 }
+                }else{}
             cursor.moveToNext();
+                if(hour3.getText().toString().contains("시")) {
                 skyval = cursor.getString(5);
                 switch (Integer.parseInt(skyval)) {
                     case 1:
@@ -1504,7 +1518,9 @@ public class MainActivity2 extends AppCompatActivity {
                     case 4:
                         timeimg3.setImageResource(R.drawable.cloud);break;
                 }
+                }else{}
             cursor.moveToNext();
+                if(hour4.getText().toString().contains("시")) {
                 skyval = cursor.getString(5);
                 switch (Integer.parseInt(skyval)) {
                     case 1:
@@ -1514,7 +1530,9 @@ public class MainActivity2 extends AppCompatActivity {
                     case 4:
                         timeimg4.setImageResource(R.drawable.cloud);break;
                 }
+                }else{}
             cursor.moveToNext();
+                if(hour5.getText().toString().contains("시")) {
                 skyval = cursor.getString(5);
                 switch (Integer.parseInt(skyval)) {
                     case 1:
@@ -1524,7 +1542,9 @@ public class MainActivity2 extends AppCompatActivity {
                     case 4:
                         timeimg5.setImageResource(R.drawable.cloud);break;
                 }
+                }else{}
             cursor.moveToNext();
+                if(hour6.getText().toString().contains("시")) {
                 skyval = cursor.getString(5);
                 switch (Integer.parseInt(skyval)) {
                     case 1:
@@ -1534,7 +1554,9 @@ public class MainActivity2 extends AppCompatActivity {
                     case 4:
                         timeimg6.setImageResource(R.drawable.cloud);break;
                 }
+                }else{}
             cursor.moveToNext();
+                if(hour7.getText().toString().contains("시")) {
                 skyval = cursor.getString(5);
                 switch (Integer.parseInt(skyval)) {
                     case 1:
@@ -1544,6 +1566,7 @@ public class MainActivity2 extends AppCompatActivity {
                     case 4:
                         timeimg7.setImageResource(R.drawable.cloud);break;
                 }
+                }else{}
             cursor.moveToNext();
                 skyval = cursor.getString(5);
                 switch (Integer.parseInt(skyval)) {
