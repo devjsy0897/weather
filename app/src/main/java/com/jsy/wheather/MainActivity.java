@@ -1158,7 +1158,7 @@ public class MainActivity2 extends AppCompatActivity {
                     case 12:
                     case 13:
                     case 14:
-                        if(12<=Integer.parseInt(time.format(date))&&Integer.parseInt(time.format(date))<15){
+                        if (12 <= Integer.parseInt(time.format(date)) && Integer.parseInt(time.format(date)) < 15) {
                             cursor.moveToNext();
                         }
                         cursor.moveToNext();
@@ -1202,27 +1202,34 @@ public class MainActivity2 extends AppCompatActivity {
                         hour4.setText(ftime + "시4");
                         timewea4.setText(t3hval + "º");
                         //}
-                }
-            cursor.moveToNext();
-                ftime = cursor.getString(4);
-                t3hval = cursor.getString(5);
-                //if((6<Integer.parseInt(time.format(date))&&Integer.parseInt(time.format(date))<859)||(1800<Integer.parseInt(time.format(date))&&Integer.parseInt(time.format(date))<2059)) {
-                    ftime = ftime.replace("00", "");
-                    layout5.setLayoutParams(params5);
-                    if (onel == 0 && Integer.parseInt(ftime) < 22) {
-                        onel5.setText("오늘");
-                        onel++;
-                    } else if (ftime == "0") {
-                        if (onel == 1) {
-                            onel5.setText("내일");
-                            onel++;
-                        } else if (onel == 2) {
-                            onel5.setText("모레");
+                    case 15:
+                    case 16:
+                    case 17:
+                        if (15 <= Integer.parseInt(time.format(date)) && Integer.parseInt(time.format(date)) < 17) {
+                            cursor.moveToNext();
+                            cursor.moveToNext();
                         }
-                    }
-                    hour5.setText(ftime + "시5");
-                    timewea5.setText(t3hval + "º");
-                //}
+                        cursor.moveToNext();
+                        ftime = cursor.getString(4);
+                        t3hval = cursor.getString(5);
+                        //if((6<Integer.parseInt(time.format(date))&&Integer.parseInt(time.format(date))<859)||(1800<Integer.parseInt(time.format(date))&&Integer.parseInt(time.format(date))<2059)) {
+                        ftime = ftime.replace("00", "");
+                        layout5.setLayoutParams(params5);
+                        if (onel == 0 && Integer.parseInt(ftime) < 22) {
+                            onel5.setText("오늘");
+                            onel++;
+                        } else if (ftime == "0") {
+                            if (onel == 1) {
+                                onel5.setText("내일");
+                                onel++;
+                            } else if (onel == 2) {
+                                onel5.setText("모레");
+                            }
+                        }
+                        hour5.setText(ftime + "시5");
+                        timewea5.setText(t3hval + "º");
+                        //}
+                }
             cursor.moveToNext();
                 ftime = cursor.getString(4);
                 t3hval = cursor.getString(5);
