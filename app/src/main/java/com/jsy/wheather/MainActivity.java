@@ -783,10 +783,8 @@ public class MainActivity2 extends AppCompatActivity {
             urlBuilder.append("&" + URLEncoder.encode("pageNo", "UTF-8") + "=" + URLEncoder.encode(i+"", "UTF-8")); /*페이지번호*/
             urlBuilder.append("&" + URLEncoder.encode("numOfRows", "UTF-8") + "=" + URLEncoder.encode("10", "UTF-8")); /*한 페이지 결과 수*/
             urlBuilder.append("&" + URLEncoder.encode("dataType", "UTF-8") + "=" + URLEncoder.encode("JSON", "UTF-8")); /*요청자료형식(XML/JSON)Default: XML*/
-            //urlBuilder.append("&" + URLEncoder.encode("base_date", "UTF-8") + "=" + URLEncoder.encode(ftdate+"", "UTF-8")); /*15년 12월 1일 발표*/
-            urlBuilder.append("&" + URLEncoder.encode("base_date", "UTF-8") + "=" + URLEncoder.encode("20210103", "UTF-8")); /*15년 12월 1일 발표*/
-            //urlBuilder.append("&" + URLEncoder.encode("base_time", "UTF-8") + "=" + URLEncoder.encode(btime+"", "UTF-8")); /*06시 발표(정시단위)*/
-            urlBuilder.append("&" + URLEncoder.encode("base_time", "UTF-8") + "=" + URLEncoder.encode("1700", "UTF-8")); /*06시 발표(정시단위)*/
+            urlBuilder.append("&" + URLEncoder.encode("base_date", "UTF-8") + "=" + URLEncoder.encode(ftdate+"", "UTF-8")); /*15년 12월 1일 발표*/
+            urlBuilder.append("&" + URLEncoder.encode("base_time", "UTF-8") + "=" + URLEncoder.encode(btime+"", "UTF-8")); /*06시 발표(정시단위)*/
             urlBuilder.append("&" + URLEncoder.encode("nx", "UTF-8") + "=" + URLEncoder.encode(locnx+"", "UTF-8")); /*예보지점의 X 좌표값*/
             urlBuilder.append("&" + URLEncoder.encode("ny", "UTF-8") + "=" + URLEncoder.encode(locny+"", "UTF-8")); /*예보지점 Y 좌표*/
 
@@ -1113,29 +1111,31 @@ public class MainActivity2 extends AppCompatActivity {
                 //if((600<Integer.parseInt(time.format(date))&&Integer.parseInt(time.format(date))<859)||(1800<Integer.parseInt(time.format(date))&&Integer.parseInt(time.format(date))<2059)) {
                 ftime = ftime.replace("00", "");
                 switch (Integer.parseInt(time.format(date))) {
+                    case 6:
+                    case 7:
+                    case 8:
+
+                        layout1.setLayoutParams(params1);
+
+
+                        if (onel == 0 && Integer.parseInt(ftime) < 22) {
+                            onel1.setText("오늘");
+                            onel++;
+                        } else if (ftime == "0") {
+                            if (onel == 0) {
+                                onel2.setText("내일");
+                                onel += 2;
+                            } else if (onel == 2) {
+                                onel2.setText("모레");
+                            }
+                        }
+                        Log.i("oneltest", onel + "");
+                        hour1.setText(ftime + "시1");
+                        timewea1.setText(t3hval + "º");
+                        //}
                     case 9:
                     case 10:
                     case 11:
-
-                    layout1.setLayoutParams(params1);
-
-
-
-                    if (onel == 0 && Integer.parseInt(ftime) < 22) {
-                        onel1.setText("오늘");
-                        onel++;
-                    } else if (ftime == "0") {
-                        if (onel == 0) {
-                            onel2.setText("내일");
-                            onel += 2;
-                        } else if (onel == 2) {
-                            onel2.setText("모레");
-                        }
-                    }
-                    Log.i("oneltest", onel + "");
-                    hour1.setText(ftime + "시1");
-                    timewea1.setText(t3hval + "º");
-                        //}
                         cursor.moveToNext();
                         ftime = cursor.getString(4);
                         t3hval = cursor.getString(5);
@@ -1207,7 +1207,7 @@ public class MainActivity2 extends AppCompatActivity {
                     case 15:
                     case 16:
                     case 17:
-                        if (15 <= Integer.parseInt(time.format(date)) && Integer.parseInt(time.format(date)) < 17) {
+                        if (15 <= Integer.parseInt(time.format(date)) && Integer.parseInt(time.format(date)) < 18) {
                             cursor.moveToNext();
                             cursor.moveToNext();
                         }
@@ -1234,39 +1234,46 @@ public class MainActivity2 extends AppCompatActivity {
                     case 18:
                     case 19:
                     case 20:
-                    if (18 <= Integer.parseInt(time.format(date)) && Integer.parseInt(time.format(date)) < 20) {
+                        if (18 <= Integer.parseInt(time.format(date)) && Integer.parseInt(time.format(date)) < 21) {
                             cursor.moveToNext();
                             cursor.moveToNext();
                             cursor.moveToNext();
                         }
-                cursor.moveToNext();
-                    ftime = cursor.getString(4);
-                    t3hval = cursor.getString(5);
-                    ftime = ftime.replace("00", "");
-                    layout6.setLayoutParams(params6);
-                    Log.i("oneltest ftime",ftime);
-                    if(onel==0&&Integer.parseInt(ftime)<22){
-                        onel6.setText("오늘");
-                        onel++;
-                    }else if(Integer.parseInt(ftime)==0) {
-                        if (onel==1) {
-                            onel6.setText("내일");
+                        cursor.moveToNext();
+                        ftime = cursor.getString(4);
+                        t3hval = cursor.getString(5);
+                        ftime = ftime.replace("00", "");
+                        layout6.setLayoutParams(params6);
+                        Log.i("oneltest ftime", ftime);
+                        if (onel == 0 && Integer.parseInt(ftime) < 22) {
+                            onel6.setText("오늘");
                             onel++;
+                        } else if (Integer.parseInt(ftime) == 0) {
+                            if (onel == 1) {
+                                onel6.setText("내일");
+                                onel++;
+                            } else if (onel == 2) {
+                                onel6.setText("모레");
+                            }
                         }
-                        else if(onel==2){
-                            onel6.setText("모레");
+                        hour6.setText(ftime + "시6");
+                        timewea6.setText(t3hval + "º");
+
+                    case 21:
+                    case 22:
+                    case 23:
+                        if (21 <= Integer.parseInt(time.format(date)) && Integer.parseInt(time.format(date)) <= 23) {
+                            cursor.moveToNext();
+                            cursor.moveToNext();
+                            cursor.moveToNext();
                         }
-                    }
-                    hour6.setText(ftime + "시6");
-                    timewea6.setText(t3hval + "º");
-                }
-            cursor.moveToNext();
-                ftime = cursor.getString(4);
-                Log.i("oneltestftime",ftime);
-                t3hval = cursor.getString(5);
-                ftime = ftime.replace("00", "");
-                Log.i("oneltestftime",ftime);
-                if(onel==0){
+                        cursor.moveToNext();
+                        ftime = cursor.getString(4);
+                        Log.i("oneltestftime", ftime);
+                        t3hval = cursor.getString(5);
+                        ftime = ftime.replace("00", "");
+                        Log.i("oneltestftime", ftime);
+                /*if(onel==0){
                         if(0<Integer.parseInt(ftime)&&Integer.parseInt(ftime)<22) {
                             onel7.setText("오늘7");
                             onel++;
@@ -1282,28 +1289,27 @@ public class MainActivity2 extends AppCompatActivity {
                     }else if(onel==2){
                         onel7.setText("모레");
                     }
-                }
+                }*/
 
-                if(onel==0&&0<Integer.parseInt(ftime)&&Integer.parseInt(ftime)<22){
-                    onel7.setText("오늘");
-                    onel++;
-                }else if(Integer.parseInt(ftime)==0) {
-                    if(onel==0) {
-                        onel7.setText("내일");
-                        onel++;
-                        onel++;
-                    }
-                    else if (onel==1) {
-                        onel7.setText("내일");
-                        onel++;
-                    }
-                    else if(onel==2){
-                        onel7.setText("모레");
-                    }
-                }
+                        if (onel == 0 && 0 < Integer.parseInt(ftime) && Integer.parseInt(ftime) < 22) {
+                            onel7.setText("오늘");
+                            onel++;
+                        } else if (Integer.parseInt(ftime) == 0) {
+                            if (onel == 0) {
+                                onel7.setText("내일");
+                                onel++;
+                                onel++;
+                            } else if (onel == 1) {
+                                onel7.setText("내일");
+                                onel++;
+                            } else if (onel == 2) {
+                                onel7.setText("모레");
+                            }
+                        }
 
-                hour7.setText(ftime + "시7");
-                timewea7.setText(t3hval + "º");
+                        hour7.setText(ftime + "시7");
+                        timewea7.setText(t3hval + "º");
+                }
             cursor.moveToNext();
                 ftime = cursor.getString(4);
                 t3hval = cursor.getString(5);
